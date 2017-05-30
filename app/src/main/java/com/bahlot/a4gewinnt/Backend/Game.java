@@ -60,6 +60,10 @@ public class Game implements iGame{
 
     }
 
+    public Board getBoardObject() {
+        return board;
+    }
+
     public String getCurentBoard(){
         return board.toString();
     }
