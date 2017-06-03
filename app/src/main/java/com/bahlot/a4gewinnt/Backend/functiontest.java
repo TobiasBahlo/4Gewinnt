@@ -10,12 +10,60 @@ public class functiontest {
         iGame game = new Game("Tobi", eColor.red, "Tania", eColor.yellow);
         System.out.println(game);
 
+		//test for diagonal right 2 left win
+		game.setCoin(6);
+		System.out.println(game.winGame());
+		game.setCoin(5);
+		System.out.println(game.winGame());
+		game.setCoin(5);
+		System.out.println(game.winGame());
+		game.setCoin(4);
+		System.out.println(game.winGame());
+		game.setCoin(4);
+		System.out.println(game.winGame());
+		game.setCoin(3);
+		System.out.println(game.winGame());
+		game.setCoin(4);
+		System.out.println(game.winGame());
+		game.setCoin(5);
+		System.out.println(game.winGame());
+		game.setCoin(3);
+		System.out.println(game.winGame());
+		game.setCoin(3);
+		System.out.println(game.winGame());
+		game.setCoin(3);
+		System.out.println(game.winGame());
+		System.out.println(game.getCurentBoard());
 
+		//test for diagonal left 2 right win
+//		game.setCoin(2);
+//		System.out.println(game.winGame());
+//		game.setCoin(3);
+//		System.out.println(game.winGame());
+//		game.setCoin(3);
+//		System.out.println(game.winGame());
+//		game.setCoin(4);
+//		System.out.println(game.winGame());
+//		game.setCoin(4);
+//		System.out.println(game.winGame());
+//		game.setCoin(1);
+//		System.out.println(game.winGame());
+//		game.setCoin(4);
+//		System.out.println(game.winGame());
+//		game.setCoin(5);
+//		System.out.println(game.winGame());
+//		game.setCoin(5);
+//		System.out.println(game.winGame());
+//		game.setCoin(5);
+//		System.out.println(game.winGame());
+//		game.setCoin(5);
+//		System.out.println(game.winGame());
+//		System.out.println(game.getCurentBoard());
 
 
 
 //		test for row win
-	game.setCoin(2);
+/*	game.setCoin(2);
 		System.out.println(game.winGame());
 		game.setCoin(6);
 	System.out.println(game.winGame());
@@ -33,7 +81,7 @@ public class functiontest {
 		System.out.println(game.winGame());
 		game.setCoin(1);
 		System.out.println(game.winGame());
-		System.out.println(game.getCurentBoard());
+		System.out.println(game.getCurentBoard()); */
 
 
 

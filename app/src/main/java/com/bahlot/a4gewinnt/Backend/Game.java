@@ -105,6 +105,14 @@ public class Game implements iGame{
             }
         }
 
+        //check if won by diagonal left to right
+        hasWon = this.checkDiagonalL2R();
+        if(hasWon){ return hasWon;};
+
+        //check if won by diagonal right to lefft
+        hasWon = this.checkDiagonalR2L();
+        if(hasWon){ return hasWon;};
+
         return hasWon;
     }
 
@@ -206,15 +214,50 @@ public class Game implements iGame{
         return hasWon;
     }
 
-    //method to check if there are 4 coins diagonal with the same color
-    public boolean checkDiagonal(){
+    //method to check if there are 4 coins diagonal with the same color from left to right
+    public boolean checkDiagonalL2R(){
         boolean hasWon = false;
+        for(int i=0; i<board.getBoard()[0].length; i++){ //every column is checked for itself
+            if(i >= 0 && i <= 3){ // if index is bigger than 3, there will be an out of bound exception
+                for(int j=board.getBoard().length-1; j>2;j--){//starts at the last row, counts down until j is 3, if j is smaller then 3 -> out of bound exception
+                    if(board.getBoard()[j][i].getColor() != eColor.none && board.getBoard()[j-1][i+1].getColor() != eColor.none
+                            && board.getBoard()[j-2][i+2].getColor() != eColor.none && board.getBoard()[j-3][i+3].getColor() != eColor.none){
 
+                        if(board.getBoard()[j][i].getColor() == board.getBoard()[j-1][i+1].getColor() &&
+                                board.getBoard()[j-1][i+1].getColor() == board.getBoard()[j-2][i+2].getColor() &&
+                                board.getBoard()[j-2][i+2].getColor() == board.getBoard()[j-3][i+3].getColor()){
+                            hasWon = true;
+                        }
+                    }
+                }
+            }
 
-
-
+        }
         return hasWon;
     }
+
+    //method to check if there are 4 coins diagonal with the same color from right to left
+    public boolean checkDiagonalR2L(){
+        boolean hasWon = false;
+        for(int i=board.getBoard()[0].length-1; i >= 0; i--){ //every column is checked for itself
+            if(i >= 3 && i <= 6){ // if index is smaller than , there will be an out of bound exception
+                for(int j=board.getBoard().length-1; j>2;j--){//starts at the last row, counts down until j is 3, if j is smaller then 3 -> out of bound exception
+                    if(board.getBoard()[j][i].getColor() != eColor.none && board.getBoard()[j-1][i-1].getColor() != eColor.none
+                            && board.getBoard()[j-2][i-2].getColor() != eColor.none && board.getBoard()[j-3][i-3].getColor() != eColor.none){
+
+                        if(board.getBoard()[j][i].getColor() == board.getBoard()[j-1][i-1].getColor() &&
+                                board.getBoard()[j-1][i-1].getColor() == board.getBoard()[j-2][i-2].getColor() &&
+                                board.getBoard()[j-2][i-2].getColor() == board.getBoard()[j-3][i-3].getColor()){
+                            hasWon = true;
+                        }
+                    }
+                }
+            }
+
+        }
+        return hasWon;
+    }
+
 
     @Override
     public String toString(){
