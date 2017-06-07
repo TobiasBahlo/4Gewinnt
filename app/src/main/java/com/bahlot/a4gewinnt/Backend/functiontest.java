@@ -13,27 +13,39 @@ public class functiontest {
 		//test for diagonal right 2 left win
 		game.setCoin(6);
 		System.out.println(game.winGame());
+
 		game.setCoin(5);
 		System.out.println(game.winGame());
+
 		game.setCoin(5);
 		System.out.println(game.winGame());
+
 		game.setCoin(4);
 		System.out.println(game.winGame());
+
 		game.setCoin(4);
 		System.out.println(game.winGame());
+
 		game.setCoin(3);
 		System.out.println(game.winGame());
+
 		game.setCoin(4);
 		System.out.println(game.winGame());
+
 		game.setCoin(5);
 		System.out.println(game.winGame());
+
 		game.setCoin(3);
 		System.out.println(game.winGame());
+
 		game.setCoin(3);
 		System.out.println(game.winGame());
+
 		game.setCoin(3);
 		System.out.println(game.winGame());
+
 		System.out.println(game.getCurentBoard());
+		System.out.println("Winner: " +game.getCurentPlayer());
 
 		//test for diagonal left 2 right win
 //		game.setCoin(2);

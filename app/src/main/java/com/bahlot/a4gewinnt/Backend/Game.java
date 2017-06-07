@@ -6,7 +6,7 @@ package com.bahlot.a4gewinnt.Backend;
 
 public class Game implements iGame{
 
-    private Player [] players = new Player[2];
+    private Player[] players = new Player[2];
     private Player curentPlayer;
     private Board board;
 
