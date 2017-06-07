@@ -10,28 +10,53 @@ public class functiontest {
         iGame game = new Game("Tobi", eColor.red, "Tania", eColor.yellow);
         System.out.println(game);
 
-		//test for diagonal right 2 left win
+        //test for diagonal right 2 left win
+
+        System.out.println("Spieler: " +game.getCurentPlayer() +" Gewonnen: " +game.winGame());
 		game.setCoin(6);
+       // System.out.println("Spieler: " +game.getCurentPlayer() +" Gewonnen: " +game.winGame());
+
+        System.out.println("Spieler: " +game.getCurentPlayer() +" Gewonnen: " +game.winGame());
+        game.setCoin(5);
+     //   System.out.println("Spieler: " +game.getCurentPlayer() +" Gewonnen: " +game.winGame());
+
+        System.out.println("Spieler: " +game.getCurentPlayer() +" Gewonnen: " +game.winGame());
+        game.setCoin(5);
+//        System.out.println("Spieler: " +game.getCurentPlayer() +" Gewonnen: " +game.winGame());
+
+        System.out.println("Spieler: " +game.getCurentPlayer() +" Gewonnen: " +game.winGame());
+        game.setCoin(4);
+ //       System.out.println("Spieler: " +game.getCurentPlayer() +" Gewonnen: " +game.winGame());
+
+        System.out.println("Spieler: " +game.getCurentPlayer() +" Gewonnen: " +game.winGame());
+        game.setCoin(4);
+ //       System.out.println("Spieler: " +game.getCurentPlayer() +" Gewonnen: " +game.winGame());
+
+        System.out.println("Spieler: " +game.getCurentPlayer() +" Gewonnen: " +game.winGame());
+        game.setCoin(3);
+//        System.out.println("Spieler: " +game.getCurentPlayer() +" Gewonnen: " +game.winGame());
+
+        System.out.println("Spieler: " +game.getCurentPlayer() +" Gewonnen: " +game.winGame());
+        game.setCoin(3);
+  //      System.out.println("Spieler: " +game.getCurentPlayer() +" Gewonnen: " +game.winGame());
+
+        System.out.println("Spieler: " +game.getCurentPlayer() +" Gewonnen: " +game.winGame());
+        game.setCoin(2);
+ //       System.out.println("Spieler: " +game.getCurentPlayer() +" Gewonnen: " +game.winGame());
+
+        System.out.println(game.getCurentBoard());
+
+        /*
+
+		game.setCoin(4);
 		System.out.println(game.winGame());
 
-		game.setCoin(5);
-		System.out.println(game.winGame());
-
-		game.setCoin(5);
+		game.setCoin(3);
 		System.out.println(game.winGame());
 
 		game.setCoin(4);
 		System.out.println(game.winGame());
 
-		game.setCoin(4);
-		System.out.println(game.winGame());
-
-		game.setCoin(3);
-		System.out.println(game.winGame());
-
-		game.setCoin(4);
-		System.out.println(game.winGame());
-
 		game.setCoin(5);
 		System.out.println(game.winGame());
 
@@ -43,9 +68,18 @@ public class functiontest {
 
 		game.setCoin(3);
 		System.out.println(game.winGame());
+*/
 
-		System.out.println(game.getCurentBoard());
-		System.out.println("Winner: " +game.getCurentPlayer());
+	//	System.out.println("Winner: " +game.getCurentPlayer());
+
+
+
+
+
+
+
+
+
 
 		//test for diagonal left 2 right win
 //		game.setCoin(2);
