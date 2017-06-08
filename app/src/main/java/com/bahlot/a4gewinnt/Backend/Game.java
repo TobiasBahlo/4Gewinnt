@@ -262,6 +262,7 @@ public class Game implements iGame{
     @Override
     public String toString(){
         String output = "";
+        output += curentPlayer + "\n";
         output += players[0] + "\n";
         output += players[1] + "\n";
         output += board + "\n";
