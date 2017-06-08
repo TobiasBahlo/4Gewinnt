@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bahlot.a4gewinnt">
+    tools:context="com.crime.against.fiedlic.jonas.connectfour.ConnectFour">
 
     <Button
         android:id="@+id/SinglePlayerStart"
