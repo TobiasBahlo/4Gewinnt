@@ -33,6 +33,6 @@ public class Player {
 
     @Override
     public String toString(){
-        return name + ";" + color;
+        return name + " (" + color +") " ;
     }
 }

@@ -1,20 +1,22 @@
 package com.bahlot.a4gewinnt.Backend;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 /**
  * Created by Toby on 30.05.2017.
  */
 
 public class Game implements iGame{
 
-    private Player [] players = new Player[2];
+    private Player[] players = new Player[2];
     private Player curentPlayer;
     private Board board;
 
-    public Game(String name1, eColor color1, String name2, eColor color2){
-        addPlayer(name1, color1);
-        addPlayer(name2, color2);
+    public Game(){
         board = new Board();
-        curentPlayer = players[0];
     }
 
     public void addPlayer(String name, eColor color) {
@@ -40,18 +42,80 @@ public class Game implements iGame{
         }
     }
 
-    public void startGame() {
-
-
+    public void startGame(String name1, eColor color1, String name2, eColor color2) {
+        addPlayer(name1, color1);
+        addPlayer(name2, color2);
+        curentPlayer = players[0];
     }
 
-    public void saveGame() {
-        // TODO Auto-generated method stub
-
+    public void saveGame(String filename) {
+        PrintWriter pw = null;
+        try{
+            pw = new PrintWriter(new FileWriter(filename + ".csv"));
+        }catch(IOException e){
+            throw new RuntimeException(e.getMessage());
+        }
+        pw.write(this.toString());
+        if(pw != null){ pw.close(); }
     }
 
-    public void loadGame() {
-        // TODO Auto-generated method stub
+    public void loadGame(String filename){
+        BufferedReader br = null;
+        String tmp = "";
+        String read;
+        try{
+            //file is uploaded
+            br = new BufferedReader(new FileReader(filename + ".csv"));
+            read = br.readLine();
+
+            while(read != null){
+                tmp += read + "\n";
+                read = br.readLine();
+            }
+
+            //after loading the file, the file will be used -> splitted
+            String [] parts = tmp.split("\n");
+            String []cPlayer = parts[0].split(";");
+            String []player1 = parts[1].split(";");
+            String [] player2 = parts[2].split(";");
+            String boardL = "";
+            for(int i=3; i < parts.length; i++){
+                boardL += parts[i]+ "\n";
+            }
+
+            //set curentplayer
+            if(cPlayer[1].equals("red")){
+                curentPlayer = new Player(cPlayer[0], eColor.red);
+            } else if(cPlayer[1].equals("yellow")){
+                curentPlayer = new Player(cPlayer[0], eColor.yellow);
+            }
+            //set player 1
+            if(player1 [1].equals("red")){
+                players[0] = new Player(player1 [0], eColor.red);
+            } else if(player1 [1].equals("yellow")){
+                players[0] = new Player(player1 [0], eColor.yellow);
+            }
+
+            //set player 2
+            if(player2 [1].equals("red")){
+                players[1] = new Player(player2 [0], eColor.red);
+            } else if(player1 [1].equals("yellow")){
+                players[1] = new Player(player2 [0], eColor.yellow);
+            }
+            //set board
+            board.boardLoad(boardL);
+
+        }catch(IOException e){
+            throw new RuntimeException(e.getMessage());
+        }
+
+        if(br != null){
+            try {
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
@@ -262,6 +326,7 @@ public class Game implements iGame{
     @Override
     public String toString(){
         String output = "";
+        output += curentPlayer + "\n";
         output += players[0] + "\n";
         output += players[1] + "\n";
         output += board + "\n";

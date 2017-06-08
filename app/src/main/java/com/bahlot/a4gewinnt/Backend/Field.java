@@ -24,7 +24,7 @@ public class Field {
     public String toString(){
         String output = "";
         if(color == eColor.none){
-            output = "o";
+            output = "_";
         }else if(color == eColor.red){
             output = "r";
         }else if(color == eColor.yellow){
