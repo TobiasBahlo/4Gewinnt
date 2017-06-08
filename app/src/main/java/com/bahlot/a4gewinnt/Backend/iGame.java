@@ -6,9 +6,9 @@ package com.bahlot.a4gewinnt.Backend;
 
 public interface iGame {
     //standard game-methods
-    public void startGame();
-    public void saveGame();
-    public void loadGame();
+    public void startGame(String name1, eColor color1, String name2, eColor color2);
+    public void saveGame(String filename);
+    public void loadGame(String filename);
     public void finishGame();
 
     //getter

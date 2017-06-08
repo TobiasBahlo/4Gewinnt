@@ -7,7 +7,8 @@ package com.bahlot.a4gewinnt.Backend;
 public class functiontest {
 
     public static void main(String[] args) {
-        iGame game = new Game("Tobi", eColor.red, "Tania", eColor.yellow);
+        iGame game = new Game();
+        game.startGame("Tobi", eColor.red, "Tania", eColor.yellow);
         System.out.println(game);
 
         //test for diagonal right 2 left win

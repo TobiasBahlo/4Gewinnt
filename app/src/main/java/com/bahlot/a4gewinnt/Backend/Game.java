@@ -1,5 +1,8 @@
 package com.bahlot.a4gewinnt.Backend;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 /**
  * Created by Toby on 30.05.2017.
  */
@@ -10,11 +13,8 @@ public class Game implements iGame{
     private Player curentPlayer;
     private Board board;
 
-    public Game(String name1, eColor color1, String name2, eColor color2){
-        addPlayer(name1, color1);
-        addPlayer(name2, color2);
+    public Game(){
         board = new Board();
-        curentPlayer = players[0];
     }
 
     public void addPlayer(String name, eColor color) {
@@ -40,17 +40,24 @@ public class Game implements iGame{
         }
     }
 
-    public void startGame() {
-
-
+    public void startGame(String name1, eColor color1, String name2, eColor color2) {
+        addPlayer(name1, color1);
+        addPlayer(name2, color2);
+        curentPlayer = players[0];
     }
 
-    public void saveGame() {
-        // TODO Auto-generated method stub
-
+    public void saveGame(String filename) {
+        PrintWriter pw = null;
+        try{
+            pw = new PrintWriter(new FileWriter(filename + ".csv"));
+        }catch(IOException e){
+            throw new RuntimeException(e.getMessage());
+        }
+        pw.write(this.toString());
+        if(pw != null){ pw.close(); }
     }
 
-    public void loadGame() {
+    public void loadGame(String filename) {
         // TODO Auto-generated method stub
 
     }
