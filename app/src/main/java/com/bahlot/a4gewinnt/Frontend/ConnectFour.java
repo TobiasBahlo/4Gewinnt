@@ -1,5 +1,7 @@
 package com.crime.against.fiedlic.jonas.connectfour;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,9 +28,9 @@ public class ConnectFour extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        switchScreen = (ViewSwitcher) findViewById(R.id.layoutswitch);
-        setContentView(R.layout.layoutswitch);
+        setContentView(R.layout.activity_connect_four);
         firstStart();
+
         //setContentView(R.layout.landscape);
         //setContentView(R.layout.portrait);
 
@@ -59,13 +61,17 @@ public class ConnectFour extends AppCompatActivity implements View.OnClickListen
         buttonExit = (ImageButton) findViewById(R.id.close);
         //buttonExit.setOnClickListener(this);
     }
+    public void setStone(int x,int y){
+
+    }
 
     @Override
     public void onClick(View v) {
 
         switch(v.getId()){
-            case R.id.SinglePlayerStart : switchScreen.showNext();//setContentView(R.layout.landscape);
+            case R.id.SinglePlayerStart : startActivity(new Intent(ConnectFour.this,Spielbrett.class));//setContentView(R.layout.landscape);
                 //calInterface;
+
                 break;
             case R.id.CreateMultiplayer : //callInterface;
                 break;
@@ -85,9 +91,11 @@ public class ConnectFour extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.seventhRow : //callInterface;
                 break;
-            case R.id.close : //Exit;
+            case R.id.close :finish();
+                System.exit(0); //Exit;
                 break;
-            case R.id.exittoclose : //Exit;
+            case R.id.exittoclose :finish();
+                System.exit(0); //Exit;
                 break;
 
             //case R.id.menu : //Menu;

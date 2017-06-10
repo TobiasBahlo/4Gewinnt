@@ -1,11 +1,13 @@
 package com.crime.against.fiedlic.jonas.connectfour;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ViewSwitcher;
 
 public class Spielbrett extends AppCompatActivity implements View.OnClickListener{
@@ -23,15 +25,28 @@ public class Spielbrett extends AppCompatActivity implements View.OnClickListene
     public Button buttonMultiPStart;
     public Button buttonFacebookAPIConnect;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        switchScreen = (ViewSwitcher) findViewById(R.id.layoutswitch);
         setContentView(R.layout.activity_spielbrett);
+
         firstStart();
         //setContentView(R.layout.landscape);
         //setContentView(R.layout.portrait);
+
+    }
+    public void setCoins(String color,int x, int y){
+        String ext="";
+        if (color.equals("red")){
+            ext = "redcoin";
+        }
+        else{
+            ext="bluecoin";
+        }
+            ext +="_"+x+"_"+y;
+        int coinID = getResources().getIdentifier(ext, "id", getPackageName());
+        findViewById(coinID).setVisibility(View.VISIBLE);
+
 
     }
     public void firstStart() {
@@ -73,7 +88,7 @@ public class Spielbrett extends AppCompatActivity implements View.OnClickListene
                 break;
             case R.id.facebookApiConnect : //callInterface;
                 break;
-            case R.id.firstRow : //calInterface;
+            case R.id.firstRow : setCoins("red",1,1);//findViewById(R.id.bluecoin_1_5).setVisibility(View.GONE);//calInterface;
                 break;
             case R.id.secondRow : //callInterface;
                 break;
