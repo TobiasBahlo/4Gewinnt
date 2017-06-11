@@ -31,7 +31,7 @@ public class GameWin extends AppCompatActivity implements View.OnClickListener{
         nameWin = (TextView) findViewById(R.id.winName);
         nameWin2 = (TextView)findViewById(R.id.winName2);
         String ausg= "Player "+winnerT+" : "+winnerName;
-        String ausg2= "with the "+wincol+" coins has won";
+        String ausg2= "with the "+wincol+" coins";
         nameWin.setText(ausg);
         nameWin2.setText(ausg2);
 
