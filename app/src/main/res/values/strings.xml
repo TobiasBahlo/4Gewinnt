@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">ConnectFour</string>
+    <string name="Backgroundimage">Backgroundimage</string>
+    <string name="Closebutton">Close</string>
+    <string name="Spielen">Play</string>
+    <string name="Facebook">Connect with Facebook</string>
+    <string name="Multiplayer">Multiplayermode</string>
+    <string name="one">First Row</string>
+    <string name="two">Second Row</string>
+    <string name="three">Third Row</string>
+    <string name="four">Fourth Row</string>
+    <string name="five">Fith Row</string>
+    <string name="six">Sixth Row</string>
+    <string name="seven">Seventh Row</string>
+
+    <string name="title_activity_spielbrett">Spielbrett</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+</resources>
