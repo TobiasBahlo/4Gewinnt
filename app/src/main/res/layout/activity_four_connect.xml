@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/four_connect_layout"
     tools:context="com.bahlot.a4gewinnt.frontend.FourConnect">
 
 
@@ -27,7 +28,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="51dp"
-        android:onClick="onClick"
+        android:onClick="onPlayerMultiplayerClicked"
         android:text="@string/Multiplayer"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -45,17 +46,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
 
-    <Button
-        android:id="@+id/facebookApiConnect"
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="52dp"
-        android:onClick="onClick"
-        android:text="@string/Facebook"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CreateMultiplayer" />
+        app:layout_constraintTop_toBottomOf="@+id/CreateMultiplayer"/>
 </android.support.constraint.ConstraintLayout>
