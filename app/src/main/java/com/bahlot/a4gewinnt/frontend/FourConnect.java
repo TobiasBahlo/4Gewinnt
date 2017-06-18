@@ -113,12 +113,7 @@ public class FourConnect extends AppCompatActivity implements View.OnClickListen
 
     }
 
-    public void onPlayerMultiplayerClicked(View v){
-        GameRequestContent content = new GameRequestContent.Builder()
-                .setMessage("Come play this level with me")
-                .build();
-        requestDialog.show(content);
-    }
+
 
     @Override
     public void onClick(View v) {
@@ -128,7 +123,13 @@ public class FourConnect extends AppCompatActivity implements View.OnClickListen
                 //calInterface;
 
                 break;
-            case R.id.CreateMultiplayer : //callInterface;
+            case R.id.CreateMultiplayer :
+                try
+                {
+                    startActivity(new Intent(FourConnect.this, MPScreen.class));//callInterface;
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
                 break;
             case R.id.facebookApiConnect : //callInterface;
                 break;

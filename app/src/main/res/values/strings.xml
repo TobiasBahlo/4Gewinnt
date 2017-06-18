@@ -21,4 +21,7 @@
 
     <string name="fb_login_protocol_scheme">fb128530221059556</string>
 
+    <string name="mpCreateGame">Create Game</string>
+    <string name="mpJoinGame">Join Game</string>
+
 </resources>
