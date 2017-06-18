@@ -7,6 +7,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.bahlot.a4gewinnt.backend.eColor;
 
@@ -17,10 +19,10 @@ import com.bahlot.a4gewinnt.backend.eColor;
 public class NetClientFacade {
 
     private static class SocketHandler extends Handler {
-        private WeakReference<iNetGame> callbackRef;
+        private WeakReference<NetGameListener> callbackRef;
 
-        SocketHandler(iNetGame callbackRef) {
-            this.callbackRef = new WeakReference<iNetGame>(callbackRef);
+        SocketHandler(NetGameListener callbackRef) {
+            this.callbackRef = new WeakReference<NetGameListener>(callbackRef);
         }
 
         @Override
@@ -146,18 +148,93 @@ public class NetClientFacade {
     }
 
     private NetClient client;
-    private iNetGame callbackInterface;
+    private List<NetGameListener> netGameListenerList = new ArrayList<NetGameListener>();
+    private static NetClientFacade instance;
 
-    public NetClientFacade(iNetGame callbackInterface){
-        if (callbackInterface == null){
-            throw new IllegalArgumentException("Callbackinterface must not be null");
+    public static NetClientFacade getInstance(){
+        if (NetClientFacade.instance == null){
+            NetClientFacade.instance = new NetClientFacade();
         }
 
-        this.callbackInterface = callbackInterface;
+        return NetClientFacade.instance;
+    }
+
+    public NetClientFacade(){
+
     }
 
     public void connectToServer(String adress, int port){
-        this.client = new NetClient(new SocketHandler(this.callbackInterface), adress, port);
+        this.client = new NetClient(new SocketHandler(new NetGameListener() {
+            @Override
+            public void onConnectionEstablished() {
+                for (NetGameListener l : netGameListenerList){
+                    l.onConnectionEstablished();
+                }
+            }
+
+            @Override
+            public void onConnectionFailure(String reason) {
+                for (NetGameListener l : netGameListenerList){
+                    l.onConnectionFailure(reason);
+                }
+            }
+
+            @Override
+            public void onGameCreated(String gameName) {
+                for (NetGameListener l : netGameListenerList){
+                    l.onGameCreated(gameName);
+                }
+            }
+
+            @Override
+            public void onCreateGameFailed(String reason) {
+                for (NetGameListener l : netGameListenerList){
+                    l.onCreateGameFailed(reason);
+                }
+            }
+
+            @Override
+            public void onSecondPlayerJoined(String secondPlayerName, eColor secondPlayerColor) {
+                for (NetGameListener l : netGameListenerList){
+                    l.onSecondPlayerJoined(secondPlayerName, secondPlayerColor);
+                }
+            }
+
+            @Override
+            public void onJoinedGame(String gameName, String firstPlayerName, eColor firstPlayerColor) {
+                for (NetGameListener l : netGameListenerList){
+                    l.onJoinedGame(gameName, firstPlayerName, firstPlayerColor);
+                }
+            }
+
+            @Override
+            public void onJoinGameFailed(String reason) {
+                for (NetGameListener l : netGameListenerList){
+                    l.onJoinGameFailed(reason);
+                }
+            }
+
+            @Override
+            public void onSecondPlayerSetCoin(int column, String playerName) {
+                for (NetGameListener l : netGameListenerList){
+                    l.onSecondPlayerSetCoin(column, playerName);
+                }
+            }
+
+            @Override
+            public void onCoinSet() {
+                for (NetGameListener l : netGameListenerList){
+                    l.onCoinSet();
+                }
+            }
+
+            @Override
+            public void onSetCoinFailed(String reason) {
+                for (NetGameListener l : netGameListenerList){
+                    l.onSetCoinFailed(reason);
+                }
+            }
+        }), adress, port);
         this.client.start();
     }
 
@@ -171,6 +248,14 @@ public class NetClientFacade {
 
     public void setCoin(int column){
         this.client.setCoin(column);
+    }
+
+    public void addListener(NetGameListener listener){
+        this.netGameListenerList.add(listener);
+    }
+
+    public void removeListener(NetGameListener listener){
+        this.netGameListenerList.remove(listener);
     }
 
 }
