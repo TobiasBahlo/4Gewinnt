@@ -1461,6 +1461,25 @@
             tools:layout_editor_absoluteY="25dp"
             tools:layout_editor_absoluteX="20dp" />
 
+        <TextView
+            android:id="@+id/statusTextGame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="@android:color/holo_purple"
+            android:visibility="gone"
+            tools:layout_editor_absoluteX="119dp"
+            tools:layout_editor_absoluteY="16dp" />
+
+        <ProgressBar
+            android:id="@+id/progressbarGame"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:layout_editor_absoluteX="73dp"
+            tools:layout_editor_absoluteY="0dp" />
+
 
     </android.support.constraint.ConstraintLayout>
 

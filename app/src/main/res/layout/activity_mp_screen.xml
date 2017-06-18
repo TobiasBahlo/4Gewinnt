@@ -54,6 +54,35 @@
         android:text="Game Name"
         android:visibility="visible" />
 
+    <EditText
+        android:id="@+id/joinGamePlayerName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupColorJoinGame"
+        android:layout_width="match_parent"
+        android:layout_height="87dp"
+        android:visibility="visible">
+
+        <RadioButton
+            android:id="@+id/newGameRedJoin"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:text="Red" />
+
+        <RadioButton
+            android:id="@+id/newGameBlueJoin"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:checked="true"
+            android:text="Blue" />
+
+    </RadioGroup>
+
     <Button
         android:id="@+id/joinGame"
         android:layout_width="match_parent"

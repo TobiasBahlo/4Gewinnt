@@ -9,14 +9,14 @@ import com.bahlot.a4gewinnt.backend.eColor;
 /**
  * Converts eColor to and from strings
  */
-class eColString {
+public class eColString {
 
     /**
      * Convert eColor to lowercase string
      * @param color Color to be converted
      * @return Converted color or empty string if color was null or has a value not accounted for
      */
-    static String convertFromECol(eColor color){
+    public static String convertFromECol(eColor color){
         String result;
 
         if (color == null){
@@ -49,7 +49,7 @@ class eColString {
      * @param col String representing a eColor value e.g. "yellow" or "YELLOW"
      * @return Converted color or null of no string matched or col was null
      */
-    static eColor convertToECol(String col){
+    public static eColor convertToECol(String col){
         eColor result;
 
         if (col == null || col.isEmpty()){

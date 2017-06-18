@@ -151,6 +151,8 @@ public class NetClientFacade {
     private List<NetGameListener> netGameListenerList = new ArrayList<NetGameListener>();
     private static NetClientFacade instance;
 
+    private NetGameListener socketNetGameListener;
+
     public static NetClientFacade getInstance(){
         if (NetClientFacade.instance == null){
             NetClientFacade.instance = new NetClientFacade();
@@ -164,7 +166,7 @@ public class NetClientFacade {
     }
 
     public void connectToServer(String adress, int port){
-        this.client = new NetClient(new SocketHandler(new NetGameListener() {
+        this.socketNetGameListener = new NetGameListener() {
             @Override
             public void onConnectionEstablished() {
                 for (NetGameListener l : netGameListenerList){
@@ -234,7 +236,8 @@ public class NetClientFacade {
                     l.onSetCoinFailed(reason);
                 }
             }
-        }), adress, port);
+        };
+        this.client = new NetClient(new SocketHandler(this.socketNetGameListener), adress, port);
         this.client.start();
     }
 

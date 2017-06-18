@@ -1,7 +1,9 @@
 package com.bahlot.a4gewinnt.frontend;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 import com.bahlot.a4gewinnt.backend.eColor;
 import com.bahlot.a4gewinnt.net.NetClientFacade;
 import com.bahlot.a4gewinnt.net.NetGameListener;
+import com.bahlot.a4gewinnt.net.eColString;
 
 
 /**
@@ -53,18 +56,32 @@ public class MPScreen extends AppCompatActivity {
 
         @Override
         public void onCreateGameFailed(String reason) {
+            p1Name = null;
+            p1Color = null;
             toggleStatus(false, reason);
             Toast.makeText(this.hostActivity, "Game creation failed! " + reason, Toast.LENGTH_LONG).show();
         }
 
         @Override
         public void onJoinedGame(String gameName, String firstPlayerName, eColor firstPlayerColor) {
-            super.onJoinedGame(gameName, firstPlayerName, firstPlayerColor);
+            startGame(firstPlayerName, eColString.convertFromECol(firstPlayerColor),
+                    p2Name, p2Color,
+                    p2Name);
+        }
+
+        @Override
+        public void onSecondPlayerJoined(String secondPlayerName, eColor secondPlayerColor) {
+            startGame(p1Name, p1Color,
+                    secondPlayerName, eColString.convertFromECol(secondPlayerColor),
+                    p1Name);
         }
 
         @Override
         public void onJoinGameFailed(String reason) {
-            super.onJoinGameFailed(reason);
+            p2Name = null;
+            p2Color = null;
+            toggleStatus(false, reason);
+            Toast.makeText(this.hostActivity, "Failed to join game! " + reason, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -74,8 +91,16 @@ public class MPScreen extends AppCompatActivity {
 
     EditText newGameName;
     EditText joinGameName;
+    EditText joinGamePlayerName;
 
     RadioGroup colorRadioGroup;
+    RadioGroup colorRadioGroupJoin;
+
+    String p1Name;
+    String p1Color;
+
+    String p2Name;
+    String p2Color;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -87,6 +112,8 @@ public class MPScreen extends AppCompatActivity {
         this.newGameName = (EditText) this.findViewById(R.id.newGameP1Name);
         this.colorRadioGroup = (RadioGroup) this.findViewById(R.id.radioGroupColor);
         this.joinGameName = (EditText) this.findViewById(R.id.joinGameName);
+        this.joinGamePlayerName = (EditText) this.findViewById(R.id.joinGamePlayerName);
+        this.colorRadioGroupJoin = (RadioGroup) this.findViewById(R.id.radioGroupColorJoinGame);
 
 
         this.netListener = new NetListener(this);
@@ -103,6 +130,20 @@ public class MPScreen extends AppCompatActivity {
         super.onDestroy();
     }
 
+    private void startGame(String p1Name, String p1Color, String p2Name, String p2Color, String localPlayerName){
+        Intent intent = new Intent(MPScreen.this,Spielbrett.class);
+
+        intent.putExtra("nameOne",p1Name);
+        intent.putExtra("nameTwo",p2Name);
+        intent.putExtra("colorOne",p1Color);
+        intent.putExtra("colorTwo",p2Color);
+        intent.putExtra("localPlayerName", localPlayerName);
+
+        this.startActivity(intent);
+    }
+
+
+
     public void onCreateGameClicked(View v){
         this.toggleStatus(true, "Creating game");
 
@@ -113,6 +154,9 @@ public class MPScreen extends AppCompatActivity {
             playerColor = eColor.red;
         }
 
+        this.p1Name = gameName;
+        this.p1Color = eColString.convertFromECol(playerColor);
+
         NetClientFacade.getInstance().newGame(gameName, playerColor);
     }
 
@@ -120,8 +164,17 @@ public class MPScreen extends AppCompatActivity {
         this.toggleStatus(true, "Attempting to join game");
 
         String gameName = this.joinGameName.getText().toString();
+        String playerName = this.joinGamePlayerName.getText().toString();
 
-        NetClientFacade.getInstance().joinGame(gameName, "Peter", eColor.none);
+        eColor playerColor = eColor.blue;
+
+        if (this.colorRadioGroupJoin.getCheckedRadioButtonId() == R.id.newGameRedJoin){
+            playerColor = eColor.red;
+        }
+
+        this.p2Name = playerName;
+        this.p2Color = eColString.convertFromECol(playerColor);
+        NetClientFacade.getInstance().joinGame(gameName, playerName, playerColor);
 
     }
 
