@@ -50,6 +50,14 @@ class MessageBuilder {
         return obj;
     }
 
+    static JSONObject gameWonMessage() throws JSONException {
+        JSONObject obj = null;
+
+        obj = MessageBuilder.initObject(JSONStrings.AT_GAMEWON);
+
+        return obj;
+    }
+
     private static JSONObject initObject(String actionType) throws JSONException {
         JSONObject obj = new JSONObject();
 

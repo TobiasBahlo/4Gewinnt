@@ -38,16 +38,18 @@ class NetClient extends Thread{
     /** Writer used to write to the socket */
     private BufferedWriter socketWriter;
 
-    private NetToClientHandler netToClientHandler;
+    private ClientToNetHandler clientToNetHandler;
+
+
 
     /**
      * This handler handles messages to this thread so we can
      * write to the socket from it (otherwise everything will be called on the main thread)
      */
-    private static class NetToClientHandler extends Handler{
+    private static class ClientToNetHandler extends Handler{
         private WeakReference<NetClient> netClientWeakReference;
 
-        public NetToClientHandler(NetClient client){
+        public ClientToNetHandler(NetClient client){
             this.netClientWeakReference = new WeakReference<NetClient>(client);
         }
 
@@ -94,7 +96,7 @@ class NetClient extends Thread{
         super.finalize();
     }
 
-    private void disconnectFromServer() {
+    public void disconnectFromServer() {
         if (this.isConnected()){
             try {
                 this.socket.close();
@@ -141,6 +143,21 @@ class NetClient extends Thread{
         }
     }
 
+    public void gameWon() {
+        if (this.isConnected()){
+            try{
+                JSONObject obj = MessageBuilder.gameWonMessage();
+                this.sendMessageOnSocket(obj.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+                this.sendMessageToUsingHandler(eMessageType.GAME_WON_FAILURE, e.getMessage());
+            }
+        } else {
+            throw new IllegalStateException("Tried to send gameWon but is not connected to server!");
+        }
+
+    }
+
     public boolean isConnected() {
         return this.socket != null;
     }
@@ -151,7 +168,7 @@ class NetClient extends Thread{
         if (!this.isConnected()){
             try {
                 Looper.prepare();
-                this.netToClientHandler = new NetToClientHandler(this);
+                this.clientToNetHandler = new ClientToNetHandler(this);
                 // Connect
                 this.socket = new Socket(this.serverAdress, this.portNumber);
                 // Setup writing
@@ -176,7 +193,7 @@ class NetClient extends Thread{
     }
 
     private void sendMessageOnSocket(String message){
-        Message m = this.netToClientHandler.obtainMessage(0, message);
+        Message m = this.clientToNetHandler.obtainMessage(0, message);
         m.sendToTarget();
     }
 

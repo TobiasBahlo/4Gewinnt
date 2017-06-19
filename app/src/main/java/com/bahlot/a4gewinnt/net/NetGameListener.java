@@ -93,4 +93,11 @@ public abstract class NetGameListener {
     public void onSetCoinFailed(String reason){
 
     }
+
+    /**
+     * Called when the other player of a game disconnects
+     */
+    public void onSecondPlayerDisconnect(){
+
+    }
 }

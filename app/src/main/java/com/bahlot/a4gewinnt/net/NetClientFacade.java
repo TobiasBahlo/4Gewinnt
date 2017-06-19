@@ -40,6 +40,9 @@ public class NetClientFacade {
                 case eMessageType.JOIN_GAME_FAILURE:{
                     this.callbackRef.get().onJoinGameFailed(msg.obj.toString());
                 } break;
+                case eMessageType.GAME_WON_FAILURE:
+                    // Do nothing
+                    break;
                 case eMessageType.JSON_DATA:{
                     this.handleJSONData(msg.obj.toString());
                 }
@@ -68,6 +71,9 @@ public class NetClientFacade {
                         case JSONStrings.AT_SETCOIN:
                             this.handleSetCoinResponse(obj);
                             break;
+                        case JSONStrings.AT_GAMEWON:
+                            // Do nothing
+                            break;
                     }
                 // Check if this is a server event
                 } else if (actionType.equals(JSONStrings.AT_SERVEREVENT)){
@@ -80,6 +86,9 @@ public class NetClientFacade {
                         case JSONStrings.EV_2NDPLAYERJOINED:
                             this.handle2ndPlayerJoined(obj);
                             break;
+                        case JSONStrings.EV_2NDPLAYERDISCONNECT:
+                            this.handle2ndPlayerDisconnect(obj);
+                            break;
                     }
                 }
 
@@ -89,6 +98,10 @@ public class NetClientFacade {
                 return;
             }
 
+        }
+
+        private void handle2ndPlayerDisconnect(JSONObject obj) {
+            this.callbackRef.get().onSecondPlayerDisconnect();
         }
 
         private void handle2ndPlayerJoined(JSONObject obj) throws JSONException {
@@ -236,6 +249,13 @@ public class NetClientFacade {
                     l.onSetCoinFailed(reason);
                 }
             }
+
+            @Override
+            public void onSecondPlayerDisconnect() {
+                for (NetGameListener l : netGameListenerList){
+                    l.onSecondPlayerDisconnect();
+                }
+            }
         };
         this.client = new NetClient(new SocketHandler(this.socketNetGameListener), adress, port);
         this.client.start();
@@ -251,6 +271,14 @@ public class NetClientFacade {
 
     public void setCoin(int column){
         this.client.setCoin(column);
+    }
+
+    public void gameWon(){
+        this.client.gameWon();
+    }
+
+    public void disconnect(){
+        this.client.disconnectFromServer();
     }
 
     public void addListener(NetGameListener listener){

@@ -43,7 +43,16 @@ public class Spielbrett extends AppCompatActivity implements View.OnClickListene
                 Toast.makeText(this.hostActivity, "Remote player tried to set coin but it's not his turn", Toast.LENGTH_SHORT).show();
             }
         }
+
+        @Override
+        public void onSecondPlayerDisconnect() {
+            Toast.makeText(this.hostActivity, "Remote player disconnected, switching to SP...", Toast.LENGTH_LONG).show();
+            disableMP();
+        }
     }
+
+
+
     Bundle extra = new Bundle();
     public Button buttonOne;
     public Button buttonSecond;
@@ -193,10 +202,12 @@ public class Spielbrett extends AppCompatActivity implements View.OnClickListene
 
     private String getLocalPlayerColor(){
         String color = "none";
-        if (localPlayerName.equals(nameOne)){
-            color = colorOneS;
-        } else if (localPlayerName.equals(nameTwo)){
-            color = colorTwoS;
+        if (localPlayerName != null){
+            if (localPlayerName.equals(nameOne)){
+                color = colorOneS;
+            } else if (localPlayerName.equals(nameTwo)){
+                color = colorTwoS;
+            }
         }
 
         return color;
@@ -294,7 +305,20 @@ public class Spielbrett extends AppCompatActivity implements View.OnClickListene
         checkWin();
         setName();
 
-        toggleRemoteDraw();
+        if (localPlayerName != null){
+            toggleRemoteDraw();
+        }
+
+    }
+
+    private void disableMP() {
+        this.localPlayerName = null;
+        this.remotePlayersTurn = false;
+
+        this.progressBar.setVisibility(View.GONE);
+        this.statusText.setText("Playing SP now");
+
+        NetClientFacade.getInstance().disconnect();
 
     }
 }

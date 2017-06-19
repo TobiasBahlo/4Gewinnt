@@ -17,5 +17,7 @@ class eMessageType {
     final static int JOIN_GAME_FAILURE = 4;
     /** Indicates that this client failed to send a request to set a coin */
     final static int SET_COIN_FAILURE = 5;
+    /** Indicates that sending the game won action failed */
+    final static int GAME_WON_FAILURE = 6;
 
 }

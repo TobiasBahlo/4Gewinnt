@@ -11,6 +11,7 @@ class JSONStrings {
     final static String AT_SETCOIN = "setCoin";
     final static String AT_SERVERRESPONSE = "serverResponse";
     final static String AT_SERVEREVENT = "serverEvent";
+    final static String AT_GAMEWON = "gameWon";
 
     final static String P1NAME = "p1Name";
     final static String P1COLOR = "p1Color";
@@ -27,4 +28,5 @@ class JSONStrings {
     final static String EVENT_TYPE = "eventType";
     final static String EV_2NDPLAYERJOINED = "secondPlayerJoined";
     final static String EV_2NDPLAYERCOIN = "secondPlayerCoin";
+    final static String EV_2NDPLAYERDISCONNECT = "secondPlayerDisconnect";
 }
