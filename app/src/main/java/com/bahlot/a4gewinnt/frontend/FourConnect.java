@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import com.facebook.AccessToken;
@@ -107,21 +108,40 @@ public class FourConnect extends AppCompatActivity implements View.OnClickListen
 
     private void processGameRequest(Uri intentData) {
         List<String> requests = intentData.getQueryParameters("request_ids");
-        String requestId = requests.get(0);
+        final String requestId = requests.get(0);
 
         GraphRequest greq = GraphRequest.newGraphPathRequest(AccessToken.getCurrentAccessToken(),
                requestId + "_" + Profile.getCurrentProfile().getId(), new GraphRequest.Callback(){
                     @Override
                     public void onCompleted(GraphResponse response) {
-                        JSONObject obj = response.getJSONObject();
-                        try {
-                            String dat = obj.getString("data");
-                            Intent i = new Intent(FourConnect.this, MPScreen.class);
-                            i.putExtra("joinGame", dat);
 
-                            startActivity(i);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                        if (response.getError() != null){
+                            Toast.makeText(FourConnect.this, "Failed to join game, invite expired!", Toast.LENGTH_LONG).show();
+                        } else {
+
+                            JSONObject obj = response.getJSONObject();
+                            try {
+                                String dat = obj.getString("data");
+                                Intent i = new Intent(FourConnect.this, MPScreen.class);
+                                i.putExtra("joinGame", dat);
+
+                                startActivity(i);
+
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Toast.makeText(FourConnect.this, "Failed to join game, invite expired!", Toast.LENGTH_LONG).show();
+                            } finally {
+                                GraphRequest.newDeleteObjectRequest(AccessToken.getCurrentAccessToken(),
+                                        requestId,
+                                        new GraphRequest.Callback(){
+                                            @Override
+                                            public void onCompleted(GraphResponse response) {
+
+                                            }
+                                        }).executeAsync();
+                            }
                         }
                     }
                 });
