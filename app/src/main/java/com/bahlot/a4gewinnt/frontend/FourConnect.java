@@ -1,7 +1,7 @@
 package com.bahlot.a4gewinnt.frontend;
 
 import android.content.Intent;
-import android.graphics.Color;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,13 +10,24 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ViewSwitcher;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.Profile;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.facebook.share.model.GameRequestContent;
 import com.facebook.share.widget.GameRequestDialog;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class FourConnect extends AppCompatActivity implements View.OnClickListener{
     private ViewSwitcher switchScreen;
@@ -34,7 +45,7 @@ public class FourConnect extends AppCompatActivity implements View.OnClickListen
     public Button buttonFacebookAPIConnect;
     private LoginButton loginButton;
     private CallbackManager callbackManager;
-    private GameRequestDialog requestDialog;
+    private boolean gameRequestPending;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +55,7 @@ public class FourConnect extends AppCompatActivity implements View.OnClickListen
         //setContentView(R.layout.landscape);
         //setContentView(R.layout.portrait);
         View view = findViewById(R.id.four_connect_layout);
-        loginButton = (LoginButton) view.findViewById(R.id.login_button);
+        loginButton = (LoginButton) view.findViewById(R.id.startFBLogin);
         loginButton.setReadPermissions("email");
 
         callbackManager = CallbackManager.Factory.create();
@@ -53,6 +64,10 @@ public class FourConnect extends AppCompatActivity implements View.OnClickListen
             public void onSuccess(LoginResult loginResult) {
                 // App code
                 Log.v("Lel1", "Success!!!1");
+
+                if (gameRequestPending){
+                    processGameRequest(getIntent().getData());
+                }
             }
 
             @Override
@@ -66,23 +81,53 @@ public class FourConnect extends AppCompatActivity implements View.OnClickListen
             }
         });
 
-        requestDialog = new GameRequestDialog(this);
-        requestDialog.registerCallback(callbackManager,
-                new FacebookCallback<GameRequestDialog.Result>() {
-                    public void onSuccess(GameRequestDialog.Result result) {
-                        //String id = result.getId();
-                        Log.v("FB", "Success invite");
-                    }
-                    public void onCancel() {
-                        Log.v("FB", "Invite canceled");
-                    }
-                    public void onError(FacebookException error) {
-                        Log.v("FB", error.getMessage());
-                    }
-                }
-        );
+
+
+        Intent i = getIntent();
+        String action = i.getAction();
+        Uri data = i.getData();
+        if (data != null){
+            List<String> req = data.getQueryParameters("request_ids");
+            for (String s : req){
+                Log.d("FB", s);
+            }
+            AccessToken token = AccessToken.getCurrentAccessToken();
+
+            if (token == null){
+                LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email"));
+                this.gameRequestPending = true;
+            } else {
+                this.processGameRequest(data);
+            }
+
+        }
+
 
     }
+
+    private void processGameRequest(Uri intentData) {
+        List<String> requests = intentData.getQueryParameters("request_ids");
+        String requestId = requests.get(0);
+
+        GraphRequest greq = GraphRequest.newGraphPathRequest(AccessToken.getCurrentAccessToken(),
+               requestId + "_" + Profile.getCurrentProfile().getId(), new GraphRequest.Callback(){
+                    @Override
+                    public void onCompleted(GraphResponse response) {
+                        JSONObject obj = response.getJSONObject();
+                        try {
+                            String dat = obj.getString("data");
+                            Intent i = new Intent(FourConnect.this, MPScreen.class);
+                            i.putExtra("joinGame", dat);
+
+                            startActivity(i);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+        greq.executeAsync();
+    }
+
     public void firstStart() {
         buttonTheExit = (ImageButton) findViewById(R.id.exittoclose);
         //buttonTheExit.setOnClickListener(this);

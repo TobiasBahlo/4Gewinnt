@@ -47,7 +47,7 @@
         app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
 
     <com.facebook.login.widget.LoginButton
-        android:id="@+id/login_button"
+        android:id="@+id/startFBLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -58,4 +58,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CreateMultiplayer"/>
+
+
 </android.support.constraint.ConstraintLayout>
