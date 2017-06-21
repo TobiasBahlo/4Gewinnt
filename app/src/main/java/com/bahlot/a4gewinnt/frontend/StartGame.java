@@ -27,23 +27,31 @@ public class StartGame extends AppCompatActivity implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        nameOneET = (EditText)findViewById(R.id.nameOne);
-        nameTwoET = (EditText)findViewById(R.id.nameTwo);
-        nameOne = nameOneET.getText().toString();
-        nameTwo = nameTwoET.getText().toString();
-        radioRed = (RadioButton) findViewById(R.id.redplayerOne);
-        if(radioRed.isChecked()){
-            colorOne = "red";
-            colorTwo = "blue";
-        }else{
-            colorOne = "blue";
-            colorTwo = "red";
+        switch(v.getId()){
+            case R.id.close :finish();
+                System.exit(0); //Exit;
+                break;
+            case R.id.startGame:
+                nameOneET = (EditText)findViewById(R.id.nameOne);
+                nameTwoET = (EditText)findViewById(R.id.nameTwo);
+                nameOne = nameOneET.getText().toString();
+                nameTwo = nameTwoET.getText().toString();
+                radioRed = (RadioButton) findViewById(R.id.redplayerOne);
+                if(radioRed.isChecked()){
+                    colorOne = "red";
+                    colorTwo = "blue";
+                }else{
+                    colorOne = "blue";
+                    colorTwo = "red";
+                }
+                Intent intent = new Intent(StartGame.this,Spielbrett.class);
+                intent.putExtra("nameOne",nameOne.toString());
+                intent.putExtra("nameTwo",nameTwo.toString());
+                intent.putExtra("colorOne",colorOne);
+                intent.putExtra("colorTwo",colorTwo);
+                startActivity(intent);
+                break;
         }
-        Intent intent = new Intent(StartGame.this,Spielbrett.class);
-        intent.putExtra("nameOne",nameOne.toString());
-        intent.putExtra("nameTwo",nameTwo.toString());
-        intent.putExtra("colorOne",colorOne);
-        intent.putExtra("colorTwo",colorTwo);
-        startActivity(intent);
+
     }
 }

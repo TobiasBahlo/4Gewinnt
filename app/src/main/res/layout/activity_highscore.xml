@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Highscore">
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/background2" />
+
+    <ImageButton
+        android:id="@+id/close"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/button_close"
+        android:contentDescription="@string/Closebutton"
+        android:onClick="onClick"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Martin"
+        android:layout_marginBottom="230dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="false"
+        />
+
+    <EditText
+        android:id="@+id/second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Jonas"
+        android:layout_marginBottom="155dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="false"
+        />
+
+    <EditText
+        android:id="@+id/third"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Tobi"
+        android:layout_marginBottom="80dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="false"
+        />
+
+    <EditText
+        android:id="@+id/fourth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Tom"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="false"
+        />
+
+    <EditText
+        android:id="@+id/fivth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Alexander"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="false"
+        />
+
+    <EditText
+        android:id="@+id/sixth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Peter"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="145dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="false"
+        />
+
+    <EditText
+        android:id="@+id/seventh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Hans"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="220dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="false"
+        />
+
+    <EditText
+        android:id="@+id/eigth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Stefan"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="295dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="false"
+        />
+
+    <EditText
+        android:id="@+id/nineth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Thomas"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="370dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="false"
+        />
+
+    <EditText
+        android:id="@+id/tenth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Felix"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="445dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="false"
+        />
+
+
+
+
+
+    <EditText
+        android:id="@+id/firstP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="5"
+        android:inputType="textPersonName"
+        android:text="298"
+        android:layout_marginBottom="230dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginRight="140dp"
+        android:gravity="right"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="false"
+        />
+
+    <EditText
+        android:id="@+id/secondP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="5"
+        android:inputType="textPersonName"
+        android:text="273"
+        android:layout_marginBottom="155dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginRight="140dp"
+        android:gravity="right"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="false"
+        />
+
+    <EditText
+        android:id="@+id/thirdP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="5"
+        android:inputType="textPersonName"
+        android:text="256"
+        android:layout_marginBottom="80dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginRight="140dp"
+        android:gravity="right"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="false"
+        />
+
+    <EditText
+        android:id="@+id/fourthP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="5"
+        android:inputType="textPersonName"
+        android:text="255"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginRight="140dp"
+        android:gravity="right"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="false"
+        />
+
+    <EditText
+        android:id="@+id/fivthP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="5"
+        android:inputType="textPersonName"
+        android:text="201"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginRight="140dp"
+        android:gravity="right"
+        android:layout_marginTop="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="false"
+        />
+
+    <EditText
+        android:id="@+id/sixthP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="5"
+        android:inputType="textPersonName"
+        android:text="154"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginRight="140dp"
+        android:gravity="right"
+        android:layout_marginTop="145dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="false"
+        />
+
+    <EditText
+        android:id="@+id/seventhP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="5"
+        android:inputType="textPersonName"
+        android:text="50"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginRight="140dp"
+        android:gravity="right"
+        android:layout_marginTop="220dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="false"
+        />
+
+    <EditText
+        android:id="@+id/eigthP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="5"
+        android:inputType="textPersonName"
+        android:text="45"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginRight="140dp"
+        android:gravity="right"
+        android:layout_marginTop="295dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="false"
+        />
+
+    <EditText
+        android:id="@+id/ninethP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="5"
+        android:inputType="textPersonName"
+        android:text="30"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginRight="140dp"
+        android:gravity="right"
+        android:layout_marginTop="370dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="false"
+        />
+
+    <EditText
+        android:id="@+id/tenthP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="5"
+        android:inputType="textPersonName"
+        android:text="22"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginRight="140dp"
+        android:gravity="right"
+        android:layout_marginTop="445dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="false"
+        />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>

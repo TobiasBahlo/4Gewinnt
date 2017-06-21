@@ -44,6 +44,7 @@ public class FourConnect extends AppCompatActivity implements View.OnClickListen
     public Button buttonSinglePStart;
     public Button buttonMultiPStart;
     public Button buttonFacebookAPIConnect;
+    public Button buttonHighscore;
     private LoginButton loginButton;
     private CallbackManager callbackManager;
     private boolean gameRequestPending;
@@ -173,6 +174,7 @@ public class FourConnect extends AppCompatActivity implements View.OnClickListen
         //buttonSeventh.setOnClickListener(this);
         buttonExit = (ImageButton) findViewById(R.id.close);
         //buttonExit.setOnClickListener(this);
+        buttonHighscore = (Button) findViewById(R.id.ShowHighscore);
     }
     public void setStone(int x,int y){
 
@@ -200,6 +202,9 @@ public class FourConnect extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.close :finish();
                 System.exit(0); //Exit;
+                break;
+            case R.id.ShowHighscore:
+                startActivity(new Intent(FourConnect.this,Highscore.class));
                 break;
             case R.id.exittoclose :finish();
                 System.exit(0); //Exit;

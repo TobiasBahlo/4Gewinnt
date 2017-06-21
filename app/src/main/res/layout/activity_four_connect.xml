@@ -7,44 +7,49 @@
     android:id="@+id/four_connect_layout"
     tools:context="com.bahlot.a4gewinnt.frontend.FourConnect">
 
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/background" />
 
     <Button
         android:id="@+id/SinglePlayerStart"
-        android:layout_width="196dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="200dp"
+        android:layout_height="75dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="108dp"
+        android:background="@drawable/button_play"
         android:onClick="onClick"
-        android:text="@string/Spielen"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/CreateMultiplayer"
-        android:layout_width="198dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="200dp"
+        android:layout_height="75dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="51dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_multi"
         android:onClick="onClick"
-        android:text="@string/Multiplayer"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SinglePlayerStart" />
 
     <ImageButton
         android:id="@+id/exittoclose"
-        android:contentDescription="@string/Closebutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/button_close"
+        android:contentDescription="@string/Closebutton"
         android:onClick="onClick"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/startFBLogin"
@@ -53,11 +58,23 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="52dp"
-        app:layout_constraintHorizontal_bias="0.503"
+        android:layout_marginTop="118dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CreateMultiplayer"/>
+
+    <Button
+        android:id="@+id/ShowHighscore"
+        android:layout_width="200dp"
+        android:layout_height="75dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="118dp"
+        android:background="@drawable/button_high"
+        android:onClick="onClick"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SinglePlayerStart" />
 
 
 </android.support.constraint.ConstraintLayout>
