@@ -7,11 +7,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.bahlot.a4gewinnt.backend.VierGewinntDbHelper;
+
 
 public class GameWin extends AppCompatActivity implements View.OnClickListener{
     TextView nameWin;
     TextView nameWin2;
     Bundle extra = new Bundle();
+
+    VierGewinntDbHelper controller;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

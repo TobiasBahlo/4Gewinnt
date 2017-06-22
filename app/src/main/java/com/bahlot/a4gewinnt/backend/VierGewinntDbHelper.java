@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.TextView;
+
 
 
 
@@ -14,54 +14,68 @@ import android.widget.TextView;
  */
 
 public class VierGewinntDbHelper extends SQLiteOpenHelper {
-
-    public static final String DB_NAME = "vierGewinnt.db";
+    public static final String DB_NAME = "viergewinnt.db";
+    public static final String TABLE_NAME = "viergewinnt_table";
     public static final int DB_VERSION = 1;
-    public static final String TABLE_VIERGEWINNT = "vierGewinnt";
 
-    public static final String PLAYER = "player";
-    public static final String WON = "won";
-    public static final String LOST = "lost";
-    public static final String FILENAME = "filename";
+    // Spalten
+    public static final String COL_1 = "NAME";
+    public static final String COL_2 = "SCORE";
+    public static final String COL_3 = "FILENAME";
 
-
-    public static final String SQL_CREATE = "create table " +TABLE_VIERGEWINNT + "(" +
-            PLAYER + "text primary key," +
-            WON + "integer not null, " +
-            LOST + "integer not null, " +
-            FILENAME + "text not null.);";
-
+    // Constructor, beim aufrufen erstellt die DB
     public VierGewinntDbHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
+        SQLiteDatabase db = this.getWritableDatabase(); //Zu testzwecken, testet ob DB erstellt wird
+    }
+
+    // Erstellt die Tabelle
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("create table " +TABLE_NAME + "(" +
+                "NAME TEXT PRIMARY KEY, " +
+                "SCORE TEXT, " +
+                "FILENAME TEXT) ");
+
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL(SQL_CREATE);
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS" + TABLE_NAME);
+        onCreate(db);
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS" +TABLE_VIERGEWINNT);
-        onCreate(sqLiteDatabase);
-    }
-
-    public void insert_VIERGEWINNT(String player, Integer won, Integer lost, String filename) {
+    /*
+    // Spieler in die Tabelle einfügen
+    public void insert_Player(String nameOneET) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put("PLAYER", player);
-        contentValues.put("WON", won);
-        contentValues.put("LOST", lost);
+        contentValues.put("NAME", nameOneET);
+    }
+*/
+
+    /*
+    public void insert_VIERGEWINNT(String nameOneET, Integer score, String filename) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("NAMEONEET", nameOneET);
+        contentValues.put("SCORE", score);
         contentValues.put("FILENAME", filename);
         this.getWritableDatabase().insertOrThrow("TABLE_VIERGEWINNT","",contentValues);
     }
+    */
 
+
+/*
+    public void insert_Score(Integer score) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("SCORE", score);
+    }
+*/
 
  // Maybe we'll need it )))
-
-    public void delete_VIERGEWINNT(String player, Integer won, Integer lost, String filename) {
-        this.getWritableDatabase().delete("TABLE_VIERGEWINNT","PLAYER='"+player+"'",null);
-        this.getWritableDatabase().delete("TABLE_VIERGEWINNT","WON='"+won+"'",null);
-        this.getWritableDatabase().delete("TABLE_VIERGEWINNT","lost='"+lost+"'",null);
+/*
+    public void delete_VIERGEWINNT(String nameOneET, Integer score, String filename) {
+        this.getWritableDatabase().delete("TABLE_VIERGEWINNT","NAME='"+nameOneET+"'",null);
+        this.getWritableDatabase().delete("TABLE_VIERGEWINNT","SCORE='"+score+"'",null);
         this.getWritableDatabase().delete("TABLE_VIERGEWINNT","filename='"+filename+"'",null);
     }
 
@@ -73,8 +87,9 @@ public class VierGewinntDbHelper extends SQLiteOpenHelper {
         Cursor cursor = this.getReadableDatabase().rawQuery("SELECT * FROM TABLE_VIERGEWINNT", null);
         textView.setText("");
         while(cursor.moveToNext()) {
-            textView.append(cursor.getString(0) + "" +cursor.getString(2)); //0 = PLAYER, 2 = Lost
+            textView.append(cursor.getString(0) + "" +cursor.getString(1)+"\n"); //0 = PLAYER, 1 = SCORE
         }
+        */
 
-    }
+
 }

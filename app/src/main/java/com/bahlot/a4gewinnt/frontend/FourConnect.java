@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
+import com.bahlot.a4gewinnt.backend.DataBaseHelper;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -103,7 +104,6 @@ public class FourConnect extends AppCompatActivity implements View.OnClickListen
             }
 
         }
-
 
     }
 
