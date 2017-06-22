@@ -1,6 +1,5 @@
 package com.bahlot.a4gewinnt.frontend;
 
-
         import android.app.Activity;
         import android.content.Intent;
         import android.graphics.Color;

@@ -7,14 +7,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 
-
-
 /**
  * Created by Leonid on 09.06.2017.
  */
 
 public class VierGewinntDbHelper extends SQLiteOpenHelper {
-    public static final String DB_NAME = "viergewinnt.db";
+    public static final String DB_NAME = "vierGewinnt.db";
     public static final String TABLE_NAME = "viergewinnt_table";
     public static final int DB_VERSION = 1;
 
@@ -26,7 +24,7 @@ public class VierGewinntDbHelper extends SQLiteOpenHelper {
     // Constructor, beim aufrufen erstellt die DB
     public VierGewinntDbHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
-        SQLiteDatabase db = this.getWritableDatabase(); //Zu testzwecken, testet ob DB erstellt wird
+//        SQLiteDatabase db = this.getWritableDatabase(); //Zu testzwecken, testet ob DB erstellt wird
     }
 
     // Erstellt die Tabelle
@@ -45,13 +43,31 @@ public class VierGewinntDbHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    /*
-    // Spieler in die Tabelle einfügen
-    public void insert_Player(String nameOneET) {
+
+    // Player in die Tabelle einfügen
+    public boolean insert_Player(String name) {
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("NAME", nameOneET);
+        contentValues.put(COL_1, name);
+        long result = db.insert(TABLE_NAME, null, contentValues);
+        if (result == -1)
+            return false;
+        else
+            return true;
     }
-*/
+
+    // Score in die Tabelle einfügen
+    public boolean insert_Score(int score) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_2, score);
+        long result = db.insert(TABLE_NAME, null, contentValues);
+        if (result == -1)
+            return false;
+        else
+            return true;
+    }
+
 
     /*
     public void insert_VIERGEWINNT(String nameOneET, Integer score, String filename) {
