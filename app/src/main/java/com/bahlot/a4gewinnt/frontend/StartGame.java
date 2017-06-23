@@ -41,18 +41,20 @@ public class StartGame extends AppCompatActivity implements View.OnClickListener
 
     }
 
-    @Override
-    public void onClick(View v) {
-        nameOne = nameOneET.getText().toString();
-        nameTwo = nameTwoET.getText().toString();
-
-        // Fügt Player in die DB
+// Fügt Player in die Tabelle
+    public void addPlayer() {
         boolean isInserted = vgDB.insert_Player(nameOneET.getText().toString()); // insert_Player aus DatabaseHelper
         if (isInserted == true)
             Toast.makeText(StartGame.this,"Data Inserted", Toast.LENGTH_LONG).show();
         else
             Toast.makeText(StartGame.this,"Data not Inserted", Toast.LENGTH_LONG).show();
+    }
 
+    @Override
+    public void onClick(View v) {
+        nameOne = nameOneET.getText().toString();
+        nameTwo = nameTwoET.getText().toString();
+        addPlayer();
         if(radioRed.isChecked()){
             colorOne = "red";
             colorTwo = "blue";

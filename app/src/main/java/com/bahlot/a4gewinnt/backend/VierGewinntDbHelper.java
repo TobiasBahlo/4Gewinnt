@@ -31,6 +31,7 @@ public class VierGewinntDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " +TABLE_NAME + "(" +
+         //       "NAME TEXT UNIQUE PRIMARY KEY, " +
                 "NAME TEXT PRIMARY KEY, " +
                 "SCORE TEXT, " +
                 "FILENAME TEXT) ");
@@ -68,24 +69,14 @@ public class VierGewinntDbHelper extends SQLiteOpenHelper {
             return true;
     }
 
-
-    /*
-    public void insert_VIERGEWINNT(String nameOneET, Integer score, String filename) {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("NAMEONEET", nameOneET);
-        contentValues.put("SCORE", score);
-        contentValues.put("FILENAME", filename);
-        this.getWritableDatabase().insertOrThrow("TABLE_VIERGEWINNT","",contentValues);
+    // Daten aus der Tabele ausgeben
+    public Cursor getData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = db.rawQuery("SELECT NAME FROM " +TABLE_NAME, null);
+        return data;
     }
-    */
 
 
-/*
-    public void insert_Score(Integer score) {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("SCORE", score);
-    }
-*/
 
  // Maybe we'll need it )))
 /*
