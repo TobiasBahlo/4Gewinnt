@@ -15,7 +15,8 @@ public class GameWin extends AppCompatActivity implements View.OnClickListener{
     TextView nameWin;
     TextView nameWin2;
 
-    int score;
+
+    int score, scoreWin;
 
     Bundle extra = new Bundle();
 
@@ -34,12 +35,17 @@ public class GameWin extends AppCompatActivity implements View.OnClickListener{
         winnerName = (String) extra.get("winPlayerName");
         String wincol = (String) extra.get("wincolor");
 
+
         String winnerT ;
         if(winner ==1){
             winnerT= "One";
+            scoreWin = score +100; // wenn gewonnen, dann +100
         }else{
             winnerT="Two";
+            scoreWin = score -100; // wenn verloren, dann -100
         }
+
+        score = scoreWin;
 
         setContentView(R.layout.activity_game_win);
         nameWin = (TextView) findViewById(R.id.winName);
@@ -51,25 +57,78 @@ public class GameWin extends AppCompatActivity implements View.OnClickListener{
         nameWin.setText(ausg);
         nameWin2.setText(ausg2);
 
-
-
         vgDB = new VierGewinntDbHelper(this); ; // ruft den Constructren in DatabaseHelper
-
     }
 
-/*
+
+
+
+    /*
+// Fügt Punkte in die Tabelle
     public void addScore() {
-        boolean isInserted = vgDB.insert_Score(score.getText().toString()); // insert_Score aus DatabaseHelper
+        boolean isInserted = vgDB.insert_Score(score); // insert_Score aus DatabaseHelper
         if (isInserted == true)
             Toast.makeText(GameWin.this,"Score Inserted", Toast.LENGTH_LONG).show();
         else
             Toast.makeText(GameWin.this,"Score not Inserted", Toast.LENGTH_LONG).show();
     }
+
+*/
+/*
+// Fügt Player und Score in die Tabelle
+    public void addData() {
+        boolean isInserted = vgDB.insert_Data(nameWin.getText().toString(), score);
+        if (isInserted == true)
+            Toast.makeText(GameWin.this,"Data Inserted", Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(GameWin.this,"Data not Inserted", Toast.LENGTH_LONG).show();
+
+    }
 */
 
 
+
+//  Dsten ändern
+    public void updateData() {
+        boolean isUpdate = vgDB.upadteData(String.valueOf(nameWin), Integer.valueOf(scoreWin));
+        if (isUpdate == true)
+            Toast.makeText(GameWin.this, "Player and Score Updated", Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(GameWin.this, "Player and Score not Updated", Toast.LENGTH_LONG).show();
+
+    }
+
+
+
+/*
+// Fügt Punkte in die Tabelle
+    public void addScore() {
+        boolean isInserted = vgDB.insert_Score(score); // insert_Score aus DatabaseHelper
+        if (isInserted == true)
+            Toast.makeText(GameWin.this,"Score Inserted", Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(GameWin.this,"Score not Inserted", Toast.LENGTH_LONG).show();
+    }
+
+*/
+/*
+// Fügt Player und Score in die Tabelle
+    public void addData() {
+        boolean isInserted = vgDB.insert_Data(nameWin.getText().toString(), score);
+        if (isInserted == true)
+            Toast.makeText(GameWin.this,"Data Inserted", Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(GameWin.this,"Data not Inserted", Toast.LENGTH_LONG).show();
+
+    }
+*/
+
     @Override
     public void onClick(View v) {
+    //    addScore();
+        updateData();
+     //   addData();
+
         switch(v.getId()){
             case R.id.newGame: startActivity(new Intent(GameWin.this,StartGame.class));
                 break;

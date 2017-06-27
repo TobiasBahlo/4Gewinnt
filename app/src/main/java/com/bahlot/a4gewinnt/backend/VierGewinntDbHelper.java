@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.TextView;
 
 
 /**
@@ -21,7 +22,7 @@ public class VierGewinntDbHelper extends SQLiteOpenHelper {
     public static final String COL_2 = "SCORE";
     public static final String COL_3 = "FILENAME";
 
-    // Constructor, beim aufrufen erstellt die DB
+    // Constructor, beim Aufrufen erstellt die DB
     public VierGewinntDbHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
 //        SQLiteDatabase db = this.getWritableDatabase(); //Zu testzwecken, testet ob DB erstellt wird
@@ -69,6 +70,31 @@ public class VierGewinntDbHelper extends SQLiteOpenHelper {
             return true;
     }
 
+    // Score und Player in die Tabelle einfügen
+    public boolean insert_Data(String name, int score) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_1, name);
+        contentValues.put(COL_2, score);
+        long result = db.insert(TABLE_NAME, null, contentValues);
+        if (result == -1)
+            return false;
+        else
+            return true;
+
+    }
+
+    // Daten ändern
+    public boolean upadteData(String name, int score) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_1, name);
+        contentValues.put(COL_2, score);
+        db.update(TABLE_NAME, contentValues, "name = ?", new String[] { name });
+        return true;
+    }
+
+
     // Daten aus der Tabele ausgeben
     public Cursor getData() {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -76,18 +102,16 @@ public class VierGewinntDbHelper extends SQLiteOpenHelper {
         return data;
     }
 
-
-
- // Maybe we'll need it )))
+    // Maybe we'll need it )))
 /*
     public void delete_VIERGEWINNT(String nameOneET, Integer score, String filename) {
-        this.getWritableDatabase().delete("TABLE_VIERGEWINNT","NAME='"+nameOneET+"'",null);
-        this.getWritableDatabase().delete("TABLE_VIERGEWINNT","SCORE='"+score+"'",null);
-        this.getWritableDatabase().delete("TABLE_VIERGEWINNT","filename='"+filename+"'",null);
+        this.getWritableDatabase().delete("viergewinnt_table","NAME='"+nameOneET+"'",null);
+        this.getWritableDatabase().delete("viergewinnt_table","SCORE='"+score+"'",null);
+        this.getWritableDatabase().delete("viergewinnt_table","filename='"+filename+"'",null);
     }
 
     public void update_VIERGEWINNT(String old_filename, String new_filename) {
-        this.getWritableDatabase().execSQL("TABLE_VIERGEWINNT SET FILENAME='"+new_filename+"'WHERE FILENAME='"+old_filename+"'");
+        this.getWritableDatabase().execSQL("viergewinnt_table SET FILENAME='"+new_filename+"'WHERE FILENAME='"+old_filename+"'");
     }
 
     public void list_all_Player(TextView textView) {

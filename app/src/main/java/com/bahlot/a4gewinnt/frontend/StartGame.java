@@ -45,9 +45,9 @@ public class StartGame extends AppCompatActivity implements View.OnClickListener
     public void addPlayer() {
         boolean isInserted = vgDB.insert_Player(nameOneET.getText().toString()); // insert_Player aus DatabaseHelper
         if (isInserted == true)
-            Toast.makeText(StartGame.this,"Data Inserted", Toast.LENGTH_LONG).show();
+            Toast.makeText(StartGame.this,"Player Inserted", Toast.LENGTH_LONG).show();
         else
-            Toast.makeText(StartGame.this,"Data not Inserted", Toast.LENGTH_LONG).show();
+            Toast.makeText(StartGame.this,"Player not Inserted", Toast.LENGTH_LONG).show();
     }
 
     @Override
