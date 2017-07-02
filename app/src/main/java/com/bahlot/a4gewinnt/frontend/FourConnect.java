@@ -12,6 +12,7 @@ import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 
+import com.bahlot.a4gewinnt.backend.VierGewinntDbHelper;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -32,6 +33,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FourConnect extends AppCompatActivity implements View.OnClickListener{
+    VierGewinntDbHelper vgDB;
+
     private ViewSwitcher switchScreen;
     public Button buttonOne;
     public Button buttonSecond;
@@ -54,6 +57,10 @@ public class FourConnect extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_four_connect);
+
+        vgDB = new VierGewinntDbHelper(this); ; // ruft den Constructren in DatabaseHelper
+
+
         firstStart();
         //setContentView(R.layout.landscape);
         //setContentView(R.layout.portrait);
@@ -179,8 +186,6 @@ public class FourConnect extends AppCompatActivity implements View.OnClickListen
     public void setStone(int x,int y){
 
     }
-
-
 
     @Override
     public void onClick(View v) {

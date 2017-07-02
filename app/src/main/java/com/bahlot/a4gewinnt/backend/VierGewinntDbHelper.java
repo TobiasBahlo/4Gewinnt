@@ -7,17 +7,23 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.TextView;
 
+import com.bahlot.a4gewinnt.frontend.Highscore;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Created by Leonid on 09.06.2017.
  */
 
 public class VierGewinntDbHelper extends SQLiteOpenHelper {
-    public static final String DB_NAME = "vierGewinnt.db";
-    public static final String TABLE_NAME = "viergewinnt_table";
-    public static final int DB_VERSION = 1;
+    public static final String DB_NAME = "vierGewinnt2.db";         // Datenbankname
+    public static final String TABLE_NAME = "viergewinnt_table";    // Viergewinnt Tabelle
+    public static final int DB_VERSION = 1;                         // Datenbank Version
 
     // Spalten
+    //Für vierGewinnt.db
     public static final String COL_1 = "NAME";
     public static final String COL_2 = "SCORE";
     public static final String COL_3 = "FILENAME";
@@ -28,13 +34,14 @@ public class VierGewinntDbHelper extends SQLiteOpenHelper {
 //        SQLiteDatabase db = this.getWritableDatabase(); //Zu testzwecken, testet ob DB erstellt wird
     }
 
+    //Für vierGewinnt2.db
+
     // Erstellt die Tabelle
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " +TABLE_NAME + "(" +
-         //       "NAME TEXT UNIQUE PRIMARY KEY, " +
                 "NAME TEXT PRIMARY KEY, " +
-                "SCORE TEXT, " +
+                "SCORE INTEGER, " +
                 "FILENAME TEXT) ");
 
     }
@@ -45,12 +52,12 @@ public class VierGewinntDbHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-
     // Player in die Tabelle einfügen
     public boolean insert_Player(String name) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_1, name);
+
         long result = db.insert(TABLE_NAME, null, contentValues);
         if (result == -1)
             return false;
@@ -58,11 +65,27 @@ public class VierGewinntDbHelper extends SQLiteOpenHelper {
             return true;
     }
 
-    // Score in die Tabelle einfügen
-    public boolean insert_Score(int score) {
+
+
+    // SCORE in die Tabelle einfügen
+    public boolean insert_SCORE(int score) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_2, score);
+
+        long result = db.insert(TABLE_NAME, null, contentValues);
+        if (result == -1)
+            return false;
+        else
+            return true;
+    }
+
+    // Spielstand in die Tabelle einfügen
+    public boolean insert_Filename(String filename) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_3, filename);
+
         long result = db.insert(TABLE_NAME, null, contentValues);
         if (result == -1)
             return false;
@@ -76,6 +99,7 @@ public class VierGewinntDbHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_1, name);
         contentValues.put(COL_2, score);
+
         long result = db.insert(TABLE_NAME, null, contentValues);
         if (result == -1)
             return false;
@@ -85,22 +109,25 @@ public class VierGewinntDbHelper extends SQLiteOpenHelper {
     }
 
     // Daten ändern
-    public boolean upadteData(String name, int score) {
+    public boolean updateData(String name, int score) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_1, name);
         contentValues.put(COL_2, score);
-        db.update(TABLE_NAME, contentValues, "name = ?", new String[] { name });
+        db.update(TABLE_NAME, contentValues, "NAME = ?", new String[] { name });
         return true;
     }
 
 
-    // Daten aus der Tabele ausgeben
-    public Cursor getData() {
+    // Spieler und Score aus der Tabele ausgeben
+    public Cursor showHighscore() {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor data = db.rawQuery("SELECT NAME FROM " +TABLE_NAME, null);
-        return data;
+        Cursor dataNameAndScore = db.rawQuery("SELECT * FROM " +TABLE_NAME+" ORDER BY " +COL_2+" DESC", null);
+        return dataNameAndScore;
     }
+
+
+
 
     // Maybe we'll need it )))
 /*

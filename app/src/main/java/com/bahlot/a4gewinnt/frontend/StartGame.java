@@ -24,6 +24,9 @@ public class StartGame extends AppCompatActivity implements View.OnClickListener
     private String colorOne;
     private String colorTwo;
 
+    int score1 = 0;
+    int score2 = 0;
+
     VierGewinntDbHelper vgDB;
 
 
@@ -41,20 +44,39 @@ public class StartGame extends AppCompatActivity implements View.OnClickListener
 
     }
 
-// Fügt Player in die Tabelle
-    public void addPlayer() {
-        boolean isInserted = vgDB.insert_Player(nameOneET.getText().toString()); // insert_Player aus DatabaseHelper
+///////////////////////////////////////////////////
+
+//Player-1
+    public void addPlayer_One() {
+        String name = nameOneET.getText().toString();
+        boolean isInserted = vgDB.insert_Player(name);
+
         if (isInserted == true)
-            Toast.makeText(StartGame.this,"Player Inserted", Toast.LENGTH_LONG).show();
+            Toast.makeText(StartGame.this,"Player-1 Inserted", Toast.LENGTH_LONG).show();
         else
-            Toast.makeText(StartGame.this,"Player not Inserted", Toast.LENGTH_LONG).show();
+            Toast.makeText(StartGame.this,"Player-1 not Inserted", Toast.LENGTH_LONG).show();
     }
+
+
+//Player-2
+    public void addPlayer_Two() {
+        String name = nameTwoET.getText().toString();
+        boolean isInserted = vgDB.insert_Player(name);
+
+        if (isInserted == true)
+            Toast.makeText(StartGame.this,"Player-2 Inserted", Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(StartGame.this,"Player-2 not Inserted", Toast.LENGTH_LONG).show();
+    }
+
+///////////////////////////////////////////////////
 
     @Override
     public void onClick(View v) {
         nameOne = nameOneET.getText().toString();
         nameTwo = nameTwoET.getText().toString();
-        addPlayer();
+        addPlayer_One();
+        addPlayer_Two();
         if(radioRed.isChecked()){
             colorOne = "red";
             colorTwo = "blue";

@@ -10,7 +10,9 @@
         android:id="@+id/imageView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/background2" />
+        app:srcCompat="@drawable/background2"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp" />
 
     <ImageButton
         android:id="@+id/close"
@@ -33,14 +35,12 @@
         android:text="Martin"
         android:layout_marginBottom="230dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:focusable="false"
-        />
+        android:layout_marginStart="40dp" />
 
     <EditText
         android:id="@+id/second"
@@ -51,14 +51,12 @@
         android:text="Jonas"
         android:layout_marginBottom="155dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:focusable="false"
-        />
+        android:layout_marginStart="40dp" />
 
     <EditText
         android:id="@+id/third"
@@ -69,14 +67,12 @@
         android:text="Tobi"
         android:layout_marginBottom="80dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:focusable="false"
-        />
+        android:layout_marginStart="40dp" />
 
     <EditText
         android:id="@+id/fourth"
@@ -87,14 +83,12 @@
         android:text="Tom"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:focusable="false"
-        />
+        android:layout_marginStart="40dp" />
 
     <EditText
         android:id="@+id/fivth"
@@ -103,16 +97,14 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Alexander"
-        android:layout_marginBottom="0dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginRight="0dp"
         android:layout_marginTop="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:focusable="false"
-        />
+        android:layout_marginStart="40dp" />
 
     <EditText
         android:id="@+id/sixth"
@@ -121,16 +113,14 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Peter"
-        android:layout_marginBottom="0dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginRight="0dp"
         android:layout_marginTop="145dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:focusable="false"
-        />
+        android:layout_marginStart="40dp" />
 
     <EditText
         android:id="@+id/seventh"
@@ -139,16 +129,14 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Hans"
-        android:layout_marginBottom="0dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginRight="0dp"
         android:layout_marginTop="220dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:focusable="false"
-        />
+        android:layout_marginStart="40dp" />
 
     <EditText
         android:id="@+id/eigth"
@@ -157,16 +145,14 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Stefan"
-        android:layout_marginBottom="0dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginRight="0dp"
         android:layout_marginTop="295dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:focusable="false"
-        />
+        android:layout_marginStart="40dp" />
 
     <EditText
         android:id="@+id/nineth"
@@ -175,16 +161,14 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Thomas"
-        android:layout_marginBottom="0dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginRight="0dp"
         android:layout_marginTop="370dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:focusable="false"
-        />
+        android:layout_marginStart="40dp" />
 
     <EditText
         android:id="@+id/tenth"
@@ -193,16 +177,14 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Felix"
-        android:layout_marginBottom="0dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginRight="0dp"
         android:layout_marginTop="445dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:focusable="false"
-        />
+        android:layout_marginStart="40dp" />
 
 
 
@@ -219,13 +201,13 @@
         android:layout_marginLeft="250dp"
         android:layout_marginRight="140dp"
         android:gravity="right"
-        android:layout_marginTop="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:focusable="false"
-        />
+        android:layout_marginStart="250dp"
+        android:layout_marginEnd="140dp" />
 
     <EditText
         android:id="@+id/secondP"
@@ -238,13 +220,13 @@
         android:layout_marginLeft="250dp"
         android:layout_marginRight="140dp"
         android:gravity="right"
-        android:layout_marginTop="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:focusable="false"
-        />
+        android:layout_marginStart="250dp"
+        android:layout_marginEnd="140dp" />
 
     <EditText
         android:id="@+id/thirdP"
@@ -257,13 +239,13 @@
         android:layout_marginLeft="250dp"
         android:layout_marginRight="140dp"
         android:gravity="right"
-        android:layout_marginTop="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:focusable="false"
-        />
+        android:layout_marginStart="250dp"
+        android:layout_marginEnd="140dp" />
 
     <EditText
         android:id="@+id/fourthP"
@@ -276,13 +258,13 @@
         android:layout_marginLeft="250dp"
         android:layout_marginRight="140dp"
         android:gravity="right"
-        android:layout_marginTop="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:focusable="false"
-        />
+        android:layout_marginStart="250dp"
+        android:layout_marginEnd="140dp" />
 
     <EditText
         android:id="@+id/fivthP"
@@ -291,7 +273,6 @@
         android:ems="5"
         android:inputType="textPersonName"
         android:text="201"
-        android:layout_marginBottom="0dp"
         android:layout_marginLeft="250dp"
         android:layout_marginRight="140dp"
         android:gravity="right"
@@ -301,7 +282,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:focusable="false"
-        />
+        android:layout_marginStart="250dp"
+        android:layout_marginEnd="140dp" />
 
     <EditText
         android:id="@+id/sixthP"
@@ -310,7 +292,6 @@
         android:ems="5"
         android:inputType="textPersonName"
         android:text="154"
-        android:layout_marginBottom="0dp"
         android:layout_marginLeft="250dp"
         android:layout_marginRight="140dp"
         android:gravity="right"
@@ -320,7 +301,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:focusable="false"
-        />
+        android:layout_marginStart="250dp"
+        android:layout_marginEnd="140dp" />
 
     <EditText
         android:id="@+id/seventhP"
@@ -329,7 +311,6 @@
         android:ems="5"
         android:inputType="textPersonName"
         android:text="50"
-        android:layout_marginBottom="0dp"
         android:layout_marginLeft="250dp"
         android:layout_marginRight="140dp"
         android:gravity="right"
@@ -339,7 +320,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:focusable="false"
-        />
+        android:layout_marginStart="250dp"
+        android:layout_marginEnd="140dp" />
 
     <EditText
         android:id="@+id/eigthP"
@@ -348,7 +330,6 @@
         android:ems="5"
         android:inputType="textPersonName"
         android:text="45"
-        android:layout_marginBottom="0dp"
         android:layout_marginLeft="250dp"
         android:layout_marginRight="140dp"
         android:gravity="right"
@@ -358,7 +339,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:focusable="false"
-        />
+        android:layout_marginStart="250dp"
+        android:layout_marginEnd="140dp" />
 
     <EditText
         android:id="@+id/ninethP"
@@ -367,7 +349,6 @@
         android:ems="5"
         android:inputType="textPersonName"
         android:text="30"
-        android:layout_marginBottom="0dp"
         android:layout_marginLeft="250dp"
         android:layout_marginRight="140dp"
         android:gravity="right"
@@ -377,7 +358,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:focusable="false"
-        />
+        android:layout_marginStart="250dp"
+        android:layout_marginEnd="140dp" />
 
     <EditText
         android:id="@+id/tenthP"
@@ -386,7 +368,6 @@
         android:ems="5"
         android:inputType="textPersonName"
         android:text="22"
-        android:layout_marginBottom="0dp"
         android:layout_marginLeft="250dp"
         android:layout_marginRight="140dp"
         android:gravity="right"
@@ -396,7 +377,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:focusable="false"
-        />
+        android:layout_marginStart="250dp"
+        android:layout_marginEnd="140dp" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -19,11 +19,15 @@ package com.bahlot.a4gewinnt.frontend;
 
 
 public class Spielbrett extends AppCompatActivity implements View.OnClickListener{
+
+    VierGewinntDbHelper vgDB;
+
     private class NetListener extends NetGameListener{
         private Activity hostActivity;
         public NetListener(Activity hostActivity){
             this.hostActivity = hostActivity;
         }
+
         @Override
         public void onCoinSet() {
             Toast.makeText(this.hostActivity, "Relayed to remote player!", Toast.LENGTH_SHORT).show();
@@ -81,6 +85,8 @@ public class Spielbrett extends AppCompatActivity implements View.OnClickListene
     private TextView statusText;
     private ProgressBar progressBar;
     private NetListener netListener;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,12 +97,15 @@ public class Spielbrett extends AppCompatActivity implements View.OnClickListene
         netListener = new NetListener(this);
         NetClientFacade.getInstance().addListener(netListener);
 
+        vgDB = new VierGewinntDbHelper(this); ; // ruft den Constructren in DatabaseHelper
+
         firstStart();
 
         //setContentView(R.layout.landscape);
         //setContentView(R.layout.portrait);
 
     }
+
     public void setCoins(String color,int x, int y){
         String ext="";
         if (color.equals("red")){
@@ -221,6 +230,12 @@ public class Spielbrett extends AppCompatActivity implements View.OnClickListene
         textVActive.setText(game.getCurentPlayerName());
         Log.d("Name:"," "+game.getCurentPlayerName());
     }
+
+
+
+
+
+
     public void checkWin(){
         if(game.winGame()){
 
@@ -229,8 +244,11 @@ public class Spielbrett extends AppCompatActivity implements View.OnClickListene
             intent.putExtra("winPlayerName",game.getCurentPlayerWinName().toString());
             intent.putExtra("wincolor",game.getCurentPlayerWinColor());
             startActivity(intent);
+
         }
     }
+
+
     @Override
     public void onClick(View v) {
 
