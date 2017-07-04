@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Visibility;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -50,8 +52,39 @@ public class MPScreen extends AppCompatActivity {
         }
         @Override
         public void onConnectionEstablished() {
+            showConnectButton(false);
             toggleStatus(false, "Connected!");
             Toast.makeText(this.hostActivity, "Connection established!", Toast.LENGTH_SHORT).show();
+            toggleFBLogin();
+            setupFBCallbacks();
+
+            toggleInviteButton();
+
+            String joinGame = getIntent().getStringExtra("joinGame");
+            if (joinGame != null){
+                try {
+                    JSONObject obj = new JSONObject(joinGame);
+
+                    String gameName = obj.getString("gameName");
+                    String usedColor = obj.getString("usedColor");
+
+                     eColor myColor = eColor.red;
+
+                    if (myColor == eColString.convertToECol(usedColor)){
+                        myColor = eColor.blue;
+                    }
+
+                    toggleStatus(true, "Attempting to join game");
+
+
+                    p2Name = Profile.getCurrentProfile().getLastName();
+                    p2Color = eColString.convertFromECol(myColor);
+                    NetClientFacade.getInstance().joinGame(gameName, p2Name, myColor);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         @Override
@@ -124,6 +157,8 @@ public class MPScreen extends AppCompatActivity {
     private GameRequestDialog requestDialog;
     private CallbackManager callbackManager;
 
+    private EditText ipText;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -144,41 +179,32 @@ public class MPScreen extends AppCompatActivity {
         this.fbLoginBtn = (LoginButton) this.findViewById(R.id.mp_fb_login);
         this.fbInviteBtn = (Button) this.findViewById(R.id.mp_fb_invite);
 
-        this.toggleFBLogin();
-        this.setupFBCallbacks();
-        this.toggleInviteButton();
+        this.ipText = (EditText) this.findViewById(R.id.ipTextField);
+        showConnectButton(true);
+
 
 
         this.netListener = new NetListener(this);
         NetClientFacade.getInstance().addListener(this.netListener);
 
-        this.toggleStatus(true, "Connecting to server...");
-        NetClientFacade.getInstance().connectToServer("192.168.2.102", 8080);
+
+
+
+        //NetClientFacade.getInstance().connectToServer("192.168.2.102", 8080);
 
         String joinGame = getIntent().getStringExtra("joinGame");
         if (joinGame != null){
+
+            JSONObject obj = null;
             try {
-                JSONObject obj = new JSONObject(joinGame);
-
-                String gameName = obj.getString("gameName");
-                String usedColor = obj.getString("usedColor");
-
-                eColor myColor = eColor.red;
-
-                if (myColor == eColString.convertToECol(usedColor)){
-                    myColor = eColor.blue;
-                }
-
-                this.toggleStatus(true, "Attempting to join game");
-
-
-                this.p2Name = Profile.getCurrentProfile().getLastName();
-                this.p2Color = eColString.convertFromECol(myColor);
-                NetClientFacade.getInstance().joinGame(gameName, this.p2Name, myColor);
-
+                obj = new JSONObject(joinGame);
+                String ip = obj.getString("ip");
+                NetClientFacade.getInstance().connectToServer(ip, 8080);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            this.showConnectButton(false);
+
         }
 
     }
@@ -199,7 +225,7 @@ public class MPScreen extends AppCompatActivity {
                     public void onSuccess(GameRequestDialog.Result result) {
                         String id = result.getRequestId();
                         Log.d("FB", "Success invite " + id);
-                        Toast.makeText(MPScreen.this, "Successfully send game invite!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MPScreen.this, "Successfully send game invite! ", Toast.LENGTH_LONG).show();
                     }
                     public void onCancel() {
                         Log.v("FB", "Invite canceled");
@@ -261,6 +287,12 @@ public class MPScreen extends AppCompatActivity {
     }
 
 
+    public void onConnectToServerClicked(View v){
+        String ip = ipText.getText().toString();
+        this.toggleStatus(true, "Connecting to server...");
+        NetClientFacade.getInstance().connectToServer(ip, 8080);
+
+    }
 
     public void onCreateGameClicked(View v){
         this.toggleStatus(true, "Creating game");
@@ -304,6 +336,7 @@ public class MPScreen extends AppCompatActivity {
         try {
             obj.put("gameName", this.p1Name);
             obj.put("usedColor", this.p1Color);
+            obj.put("ip", ipText.getText().toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -336,5 +369,31 @@ public class MPScreen extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
 
+    }
+
+    private void showConnectButton(boolean show)
+    {
+        ViewGroup root = (ViewGroup) this.fbLoginBtn.getParent();
+
+
+        for (int i = 0; i < root.getChildCount(); ++i)
+        {
+           View v = root.getChildAt(i);
+
+            if (v.getId() == R.id.ipBtn || v.getId() == R.id.ipTextField){
+                if (show){
+                    v.setVisibility(View.VISIBLE);
+                } else {
+                    v.setVisibility(View.GONE);
+                }
+
+            } else {
+                if (show){
+                    v.setVisibility(View.GONE);
+                } else {
+                    v.setVisibility(View.VISIBLE);
+                }
+            }
+        }
     }
 }

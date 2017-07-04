@@ -133,6 +133,7 @@ public class FourConnect extends AppCompatActivity implements View.OnClickListen
                                 Intent i = new Intent(FourConnect.this, MPScreen.class);
                                 i.putExtra("joinGame", dat);
 
+
                                 startActivity(i);
 
 
