@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Debug;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.bahlot.a4gewinnt.frontend.Highscore;
@@ -31,7 +33,11 @@ public class VierGewinntDbHelper extends SQLiteOpenHelper {
     // Constructor, beim Aufrufen erstellt die DB
     public VierGewinntDbHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
-//        SQLiteDatabase db = this.getWritableDatabase(); //Zu testzwecken, testet ob DB erstellt wird
+        SQLiteDatabase db = this.getWritableDatabase(); //Zu testzwecken, testet ob DB erstellt wird
+        db.execSQL("create table if not exists " +TABLE_NAME + "(" +
+                "NAME TEXT PRIMARY KEY, " +
+                "SCORE INTEGER, " +
+                "FILENAME TEXT) ");
     }
 
     //Für vierGewinnt2.db
@@ -39,6 +45,7 @@ public class VierGewinntDbHelper extends SQLiteOpenHelper {
     // Erstellt die Tabelle
     @Override
     public void onCreate(SQLiteDatabase db) {
+
         db.execSQL("create table " +TABLE_NAME + "(" +
                 "NAME TEXT PRIMARY KEY, " +
                 "SCORE INTEGER, " +
@@ -48,7 +55,7 @@ public class VierGewinntDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS" + TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
 
@@ -110,19 +117,28 @@ public class VierGewinntDbHelper extends SQLiteOpenHelper {
 
     // Daten ändern
     public boolean updateData(String name, int score) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.query(TABLE_NAME, new String[]{COL_2}, COL_1 + "=\""+name +"\"", null, null, null, null);
+
+        int oldScore = 0;
+        if (c.moveToFirst() && c.getCount() > 0){
+            oldScore = c.getInt(c.getColumnIndex(COL_2));
+        }
+        score += oldScore;
+        c.close();
+        db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_1, name);
         contentValues.put(COL_2, score);
-        db.update(TABLE_NAME, contentValues, "NAME = ?", new String[] { name });
-        return true;
+        int numrows = db.update(TABLE_NAME, contentValues, "NAME = ?", new String[] { name });
+        return numrows > 0;
     }
 
 
     // Spieler und Score aus der Tabele ausgeben
     public Cursor showHighscore() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor dataNameAndScore = db.rawQuery("SELECT * FROM " +TABLE_NAME+" ORDER BY " +COL_2+" DESC", null);
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor dataNameAndScore = db.query(TABLE_NAME, new String[]{COL_1, COL_2}, null, null, null, null, COL_2 + " DESC");//db.rawQuery("SELECT * FROM " +TABLE_NAME+" ORDER BY " +COL_2+" DESC", null);
         return dataNameAndScore;
     }
 

@@ -238,11 +238,17 @@ public class Spielbrett extends AppCompatActivity implements View.OnClickListene
 
     public void checkWin(){
         if(game.winGame()){
+            String winnerName = game.getCurentPlayerWinName();
+            int winnerPos = game.getPositionOfPlayer(winnerName);
+            int loserPosition = winnerPos == 0 ? 1 : 0;
+
+            String loserName = game.getPlayerNameByPosition(loserPosition);
 
             Intent intent = new Intent(Spielbrett.this,GameWin.class);
             intent.putExtra("winner",game.getPositionOfPlayer(game.getCurentPlayerName()));
             intent.putExtra("winPlayerName",game.getCurentPlayerWinName().toString());
             intent.putExtra("wincolor",game.getCurentPlayerWinColor());
+            intent.putExtra("loserName", game.getPlayerNameByPosition(loserPosition));
             startActivity(intent);
 
         }

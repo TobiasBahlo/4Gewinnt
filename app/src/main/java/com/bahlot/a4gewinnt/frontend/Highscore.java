@@ -2,9 +2,11 @@ package com.bahlot.a4gewinnt.frontend;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -51,7 +53,7 @@ public class Highscore extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_highscore);
 
 
-        firstHS = (EditText)findViewById(R.id.first);
+       /* firstHS = (EditText)findViewById(R.id.first);
         firstHSP = (EditText)findViewById(R.id.firstP);
 
         secondHS = (EditText)findViewById(R.id.second);
@@ -79,7 +81,7 @@ public class Highscore extends AppCompatActivity implements View.OnClickListener
         ninethHSP = (EditText)findViewById(R.id.ninethP);
 
         tenthHS = (EditText)findViewById(R.id.tenth);
-        tenthHSP = (EditText)findViewById(R.id.tenthP);
+        tenthHSP = (EditText)findViewById(R.id.tenthP);*/
 
         vgDB = new VierGewinntDbHelper(this); ; // ruft den Constructren in DatabaseHelper
 
@@ -87,12 +89,45 @@ public class Highscore extends AppCompatActivity implements View.OnClickListener
         viewHighscore();
     }
 
-///////////////////////////////////////////////
+    @Override
+    protected void onResume() {
+        super.onResume();
+        viewHighscore();
+    }
+
+    ///////////////////////////////////////////////
 // Highscore anzeigen
     public void viewHighscore() {
         Cursor data = vgDB.showHighscore();
+        if (data.moveToFirst()){
+            do{
+                Log.v("DB", "High: " + data.getString(data.getColumnIndex(VierGewinntDbHelper.COL_1)) + " Score: " +
+                data.getInt(data.getColumnIndex(VierGewinntDbHelper.COL_2)));
+            } while (data.moveToNext());
+        }
 
-        StringBuffer buffer1A = new StringBuffer();
+        if (data.moveToFirst()){
+            boolean hasNext = true;
+            Resources res = getResources();
+            for (int i = 1; i <= 10; ++i){
+                EditText text = (EditText) findViewById(res.getIdentifier("t" + i, "id", getPackageName()));
+                EditText score = (EditText) findViewById(res.getIdentifier("p" + i, "id", getPackageName()));
+                if (hasNext){
+
+
+                    text.setText(data.getString(data.getColumnIndex(VierGewinntDbHelper.COL_1)));
+                    score.setText(""+data.getInt(data.getColumnIndex(VierGewinntDbHelper.COL_2)));
+                } else {
+                    text.setText("");
+                    score.setText("");
+                }
+
+                hasNext = data.moveToNext();
+
+            }
+
+        }
+        /*StringBuffer buffer1A = new StringBuffer();
         StringBuffer buffer1B = new StringBuffer();
 
         StringBuffer buffer2A = new StringBuffer();
@@ -224,7 +259,7 @@ public class Highscore extends AppCompatActivity implements View.OnClickListener
             tenthHSP.setText(buffer10B.toString());
 
             x++;
-        }
+        }*/
     }
 
 ///////////////////////////////////////////////

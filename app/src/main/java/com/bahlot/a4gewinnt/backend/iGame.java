@@ -19,6 +19,7 @@ public interface iGame {
     public String getCurentPlayerWinColor();
     public int[] getMove();
     public int getPositionOfPlayer(String name);
+    public String getPlayerNameByPosition(int position);
     public String getCurentPlayerWinName();
     public String getCurentPlayerName();
     //other game-methods

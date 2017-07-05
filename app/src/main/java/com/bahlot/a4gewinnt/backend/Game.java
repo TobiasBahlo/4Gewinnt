@@ -45,6 +45,13 @@ public class Game implements iGame{
         }
     }
 
+    public String getPlayerNameByPosition(int pos){
+        pos = Math.max(pos, 0);
+        pos = Math.min(pos, 1);
+
+        return players[pos].getName();
+    }
+
     public void startGame(String name1, eColor color1, String name2, eColor color2) {
         addPlayer(name1, color1);
         addPlayer(name2, color2);

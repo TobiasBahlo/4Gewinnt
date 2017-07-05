@@ -35,33 +35,28 @@ public class GameWin extends AppCompatActivity implements View.OnClickListener{
         winner = (int)extra.get("winner");
         winnerName = (String) extra.get("winPlayerName");
         String wincol = (String) extra.get("wincolor");
+        String loserName = (String) extra.get("loserName");
+        vgDB = new VierGewinntDbHelper(this); ; // ruft den Constructren in DatabaseHelper
 
 
-        String winnerT ;
-        if(winner ==1){
-            winnerT= "One";
-            score = score +100; // wenn gewonnen, dann +100
-        }else{
-            winnerT="Two";
-            score = score -100; // wenn verloren, dann -100
-        }
 
         setContentView(R.layout.activity_game_win);
         nameWin = (TextView) findViewById(R.id.winName);
         nameWin2 = (TextView)findViewById(R.id.winName2);
 
-    //    String ausg= "Player "+winnerT+" : "+winnerName;
-    //    String ausg2= "with the "+wincol+" coins";
+        //    String ausg= "Player "+winnerT+" : "+winnerName;
+        //    String ausg2= "with the "+wincol+" coins";
 
-    //    nameWin.setText(ausg);
-    //    nameWin2.setText(ausg2);
+        //    nameWin.setText(ausg);
+        //    nameWin2.setText(ausg2);
 
         nameWin.setText(winnerName);
         nameWin2.setText(wincol);
 
-        vgDB = new VierGewinntDbHelper(this); ; // ruft den Constructren in DatabaseHelper
 
-        UpdateData();
+        vgDB.updateData(winnerName, 100);
+        vgDB.updateData(loserName, -100);
+        //UpdateData();
     }
 
 // Update Daten
